@@ -26,17 +26,20 @@
                     <i class="fas fa-bars navbar-toggler-icon"></i>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item"> <a class="nav-link active margin-left text-bold" aria-current="page"
+                                href="#home">Employment System</a> </li>
+                    </ul>
                     <ul class="navbar-nav menu-navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active margin-left" aria-current="page" href="#home">Employment System</a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#home">Jobs</a>
                         </li>
-                         <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link" href="#about">Company</a>
                         </li>
-
+                         <li class="nav-item">
+                            <a class="nav-link" href="#events">Events</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#about">About</a>
                         </li>

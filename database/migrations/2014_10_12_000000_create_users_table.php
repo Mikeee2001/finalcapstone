@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('full_name');
             $table->string('email')->unique();
-            $table->string('address');
             $table->enum('role_as', ['admin', 'jobseeker', 'employer'])->default('jobseeker');
             $table->string('password');
             $table->enum('status', ['active', 'inactive'])->default('inactive');
@@ -28,7 +27,6 @@ return new class extends Migration
             [
                 'full_name' => 'admin',
                 'email' => 'admin@gmail.com',
-                'address' => 'dyan lang po',
                 'role_as' => 'admin',
                 'password' => '$2y$12$8qGbpTMe/NFXUMNZbMB5Gu0SFlp/hOcbGb6yyhSdn6MxedBmK7Eta', // hashed password
                 'status' => 'active',
@@ -38,7 +36,6 @@ return new class extends Migration
             [
                 'full_name' => 'Juan Dela Cruz',
                 'email' => 'patient@gmail.com',
-                'address' => 'Makati City',
                 'role_as' => 'jobseeker',
                 'password' => '$2y$12$8qGbpTMe/NFXUMNZbMB5Gu0SFlp/hOcbGb6yyhSdn6MxedBmK7Eta', // hashed password
                 'status' => 'active',
@@ -48,7 +45,6 @@ return new class extends Migration
             [
                 'full_name' => 'Willie Ong',
                 'email' => 'dentist@gmail.com',
-                'address' => 'BGC Bicutan City',
                 'role_as' => 'employer',
                 'password' => '$2y$12$8qGbpTMe/NFXUMNZbMB5Gu0SFlp/hOcbGb6yyhSdn6MxedBmK7Eta', // hashed password
                 'status' => 'active',
@@ -59,7 +55,6 @@ return new class extends Migration
             [
                 'full_name' => 'Jose Rizal',
                 'email' => 'patient2@gmail.com',
-                'address' => 'Bulacan',
                 'role_as' => 'jobseeker',
                 'password' => '$2y$12$8qGbpTMe/NFXUMNZbMB5Gu0SFlp/hOcbGb6yyhSdn6MxedBmK7Eta', // hashed password
                 'status' => 'active',
