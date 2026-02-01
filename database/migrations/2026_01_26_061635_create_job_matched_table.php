@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('skill_match_percent');
             $table->timestamps();
 
-            $table->foreignId('jobpost_id')->constrained('job_post')->onDelete('cascade');
+            $table->foreignId('jobpost_id')->constrained('job_posts')->onDelete('cascade');
             $table->foreignId('jobseeker_id')->constrained('jobseeker')->onDelete('cascade');
         });
     }
