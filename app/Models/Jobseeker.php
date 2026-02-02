@@ -10,4 +10,20 @@ class Jobseeker extends Model
     use HasFactory;
 
     protected $table = 'jobseeker';
+
+    protected $fillable = [
+        'address',
+        'expected_salary',
+        'application_letter',
+        'resume',
+        'job_type',
+        'user_id',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 }
+

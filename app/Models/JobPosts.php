@@ -10,4 +10,16 @@ class JobPosts extends Model
     use HasFactory;
 
     protected $table = 'job_posts';
+
+    protected $fillable = [
+        'title',
+        'description',
+        'location',
+        'salary_min',
+        'salary_max',
+        'job_type',
+        'date_posted',
+        'company_id',
+    ];
 }
+    

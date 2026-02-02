@@ -3,11 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Employers;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -19,7 +20,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $table = 'users';
-    
+
     protected $fillable = [
         'full_name',
         'email',
@@ -49,4 +50,19 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function employer()
+    {
+        return $this->hasOne(Employers::class, 'user_id');
+    }
+
+    public function jobseeker()
+    {
+        return $this->hasOne(Jobseeker::class, 'user_id');
+    }
+
+    public function events()
+    {
+        return $this->hasMany(Events::class, 'user_id');
+    }
 }

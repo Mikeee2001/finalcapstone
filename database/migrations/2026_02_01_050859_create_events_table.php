@@ -12,20 +12,17 @@ return new class extends Migration {
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-
             $table->string('event_name');
             $table->string('location');
 
-            $table->timestamp('start_time');
-            $table->timestamp('end_time');
-
+            $table->dateTime('start_time');
+            $table->dateTime('end_time');
+            $table->enum('status', ['upcoming', 'ongoing', 'completed'])->default('upcoming');
             $table->text('description')->nullable();
 
-            $table->foreignId('user_id')
-                ->constrained('users')
-                ->cascadeOnDelete();
-
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
+
         });
     }
 

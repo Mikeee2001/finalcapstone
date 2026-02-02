@@ -9,5 +9,14 @@ class JobApplications extends Model
 {
     use HasFactory;
 
-     protected $table = 'job_applications';
+    protected $table = 'job_applications';
+
+    protected $fillable = [
+        'job_post_id',
+        'jobseeker_id',
+        'status',
+        'application_date',
+    ];
 }
+
+

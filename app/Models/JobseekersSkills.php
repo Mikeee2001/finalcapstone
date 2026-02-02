@@ -10,4 +10,9 @@ class JobseekersSkills extends Model
     use HasFactory;
 
     protected $table = 'jobseeker_skills';
+
+    protected $fillable = [
+        'jobseeker_id',
+        'skill_id',
+    ];
 }
