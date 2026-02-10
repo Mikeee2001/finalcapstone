@@ -14,7 +14,6 @@ return new class extends Migration {
             $table->id();
             $table->string('event_name');
             $table->string('location');
-
             $table->dateTime('start_time');
             $table->dateTime('end_time');
             $table->enum('status', ['upcoming', 'ongoing', 'completed'])->default('upcoming');

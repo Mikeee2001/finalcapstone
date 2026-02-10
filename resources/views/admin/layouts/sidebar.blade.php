@@ -28,13 +28,14 @@
           <a href="{{ route('admin.user-list') }}" class="nav-link {{ Route::is('admin.user-list') ? 'active' : '' }}">
               <i class="nav-icon fas fa-users"></i>
               <p>
-                  User
+                  Users
               </p>
           </a>
         </li>
-          <!-- Company List -->
+
+          {{-- <!-- Company List -->
         <li class="nav-item menu-open" style="margin-bottom: 10px;">
-          {{-- <a href="{{ route('admin.company-list') }}" class="nav-link {{ Route::is('admin.company-list') ? 'active' : '' }}"> --}}
+          <a href="{{ route('admin.company-list') }}" class="nav-link {{ Route::is('admin.company-list') ? 'active' : '' }}">
               <i class="nav-icon fas fa-building"></i>
               <p>
                   Company
@@ -46,10 +47,20 @@
         </li>
               <!-- Jobs List -->
         <li class="nav-item menu-open" style="margin-bottom: 10px;">
-          {{-- <a href="{{ route('admin.job-list') }}" class="nav-link {{ Route::is('admin.job-list') ? 'active' : '' }}"> --}}
+          <a href="{{ route('admin.job-list') }}" class="nav-link {{ Route::is('admin.job-list') ? 'active' : '' }}">
               <i class="nav-icon fas fa-briefcase"></i>
               <p>
                   Jobs
+              </p>
+          </a>
+        </li> --}}
+
+              <!-- Jobs List -->
+        <li class="nav-item menu-open" style="margin-bottom: 10px;">
+          <a href="{{ route('admin.events') }}" class="nav-link {{ Route::is('admin.events') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-calendar-alt"></i>
+              <p>
+                  Events
               </p>
           </a>
         </li>

@@ -18,6 +18,7 @@ class JobMatched extends Model
         'skill_match_percent',
         'jobpost_id',
         'jobseeker_id',
+        'total_match_percent',
     ];
 }
 

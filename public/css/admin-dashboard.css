@@ -103,3 +103,22 @@
         font-size: 12px;
     }
 }
+
+.dashboard-box {
+    min-height: 90px;
+    padding: 10px;
+}
+
+.dashboard-box h3 {
+    font-size: 22px;
+    margin-bottom: 3px;
+}
+
+.dashboard-box p {
+    font-size: 13px;
+}
+
+.small-box .icon {
+    font-size: 35px;
+    top: 8px;
+}

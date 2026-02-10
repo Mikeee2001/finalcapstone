@@ -17,7 +17,6 @@ class Events extends Model
         'location',
         'start_time',
         'end_time',
-        'user_id',
         'status',
     ];
 

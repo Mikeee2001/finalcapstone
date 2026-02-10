@@ -17,6 +17,7 @@ return new class extends Migration
             $table->boolean('salary_match');
             $table->boolean('type_match');
             $table->integer('skill_match_percent');
+            $table->integer('total_match_percent');
             $table->timestamps();
 
             $table->foreignId('jobpost_id')->constrained('job_posts')->onDelete('cascade');

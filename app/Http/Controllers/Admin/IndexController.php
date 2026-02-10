@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\CompanyDetails;
+use App\Models\Events;
+use App\Models\JobPosts;
 use App\Models\User;
+use Faker\Provider\ar_EG\Company;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +16,12 @@ class IndexController extends Controller
 {
     public function index()
     {
-        return view('admin.dashboard');
+        $totalUsers = User::where('status', 'active')->count();
+        $totalJobs = JobPosts::count();
+        $totalEvents = Events::count();
+        $totalCompany = CompanyDetails::count();
+
+        return view('admin.dashboard', compact('totalUsers', 'totalJobs', 'totalEvents', 'totalCompany'));
     }
 
     public function logout(Request $request)
@@ -35,15 +44,13 @@ class IndexController extends Controller
         return redirect()->route('signin')->with('error', 'No active session found.');
     }
 
-    public function addUser(Request $request)
+      public function addUser(Request $request)
     {
         $validate = Validator::make(request()->all(), [
             'full_name' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'role_as' => 'required|in:admin,jobseeker,employer',
-
         ]);
 
         // RETURN VALIDATION ERRORS
@@ -56,7 +63,6 @@ class IndexController extends Controller
         $user = User::create([
             'full_name' => $request->input('full_name'),
             'email' => $request->input('email'),
-            'address' => $request->input('address'),
             'role_as' => $request->input('role_as'),
             'password' => bcrypt($request->input('password')),
             'status' => 'active',
@@ -68,6 +74,7 @@ class IndexController extends Controller
             return response()->json(['success' => false], 500);
         }
     }
+
 
     public function userList()
     {

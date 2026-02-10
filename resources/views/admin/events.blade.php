@@ -23,50 +23,48 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="font-size: 2em">User's List</h3>
-                            <!-- Add New Account Button -->
+                            <h3 class="card-title" style="font-size: 2em">Event Lists</h3>
+                            <!-- Add New Event Button -->
                             <button class="btn btn-primary float-right" data-toggle="modal"
-                                data-target="#addAccountModal">
-                                Add User Account
+                                data-target="#addEventModal">
+                                Add Event
                             </button>
                         </div>
                         <div class="card-body">
-                            <table id="userTable" class="table table-bordered table-striped">
+                            <table id="eventTable" class="table table-sm table-bordered table-striped">
                                 <thead>
                                     <tr class="text-center">
-
-                                        <td>No.</td>
-                                        <th>Full Name</th>
-                                        <th>Email</th>
+                                        <th>No.</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Location</th>
+                                        <th>Start Time</th>
+                                        <th>End Time</th>
                                         <th>Status</th>
-                                        <th>Role</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($users as $user)
+                                    @foreach ($events as $event)
                                         <tr class="text-center">
-                                           
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $user->full_name }}</td>
-                                            <td>{{ $user->email }}</td>
-                                            <td>{{ $user->status }}</td>
-                                            <td>{{ $user->role_as }}</td>
+                                            <td>{{ $event->event_name }}</td>
+                                            <td>{{ $event->description }}</td>
+                                            <td>{{ $event->location }}</td>
+                                            <td>{{ $event->start_time }}</td>
+                                            <td>{{ $event->end_time }}</td>
+                                            <td>{{ $event->status }}</td>
                                             <td>
+                                                <form>
+                                            <td action="{{ route('admin.delete-event', $event->id) }}" method="POST"
+                                                style="display:inline;"
+                                                onsubmit="return confirm('Are you sure you want to delete this event?');">
 
-                                                <form action="{{ route('admin.delete-user', $user->id) }}"
-                                                    method="POST" style="display:inline;"
-                                                    onsubmit="return confirm('Are you sure you want to delete this user?');">
-
-                                                    @csrf
-                                                    @method('DELETE')
-
-                                                    <button type="submit" class="btn btn-danger">
-                                                        Delete
-                                                    </button>
-                                                </form>
+                                                @csrf
+                                                @method('DELETE')
 
                                             </td>
+                                            </form>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -77,64 +75,77 @@
             </div>
         </div>
 
-        <!-- Modal for Adding New Account -->
-        <div class="modal fade" id="addAccountModal" tabindex="-1" role="dialog"
-            aria-labelledby="addAccountModalLabel" aria-hidden="true">
+        <!-- Modal for Adding New Events -->
+        <div class="modal fade" id="addEventModal" tabindex="-1" role="dialog" aria-labelledby="addEventModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
+
                     <div class="modal-header">
-                        <h5 class="modal-title" id="addAccountModalLabel">Add User Account</h5>
+                        <h5 class="modal-title" id="addEventModalLabel">Add New Event</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form id="addUserForm">
+
+                    <form id="addEventForm" class="form-horizontal">
                         @csrf
                         <div class="modal-body">
-                            <div class="form-group">
-                                <label for="fullName">Full Name</label>
-                                <input type="text" class="form-control" placeholder="Enter Full name" id="fullName"
-                                    name="full_name" required>
-                                <span class="text-danger error-text full_name_error"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control" placeholder="Enter email" id="email"
-                                    name="email" required>
-                                <span class="text-danger error-text email_error"></span>
+
+                            <div class="form-group row">
+                                <label for="eventName" class="col-sm-3 col-form-label">Event Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="eventName" name="event_name"
+                                        placeholder="Enter Event name" required>
+                                    <span class="text-danger error-text event_name_error"></span>
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="role_as">Role</label>
-                                <select class="form-control" id="role_as" name="role_as" required>
-                                    <option value="" disabled selected>Select role</option>
-                                    <option value="admin">Admin</option>
-                                    <option value="employer">Employer</option>
-                                    <option value="jobseeker">Jobseeker</option>
-                                </select>
-                                <span class="text-danger error-text role_as_error"></span>
+                            <div class="form-group row">
+                                <label for="description" class="col-sm-3 col-form-label">Description</label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" id="description" name="description" placeholder="Enter description"></textarea>
+                                    <span class="text-danger error-text description_error"></span>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control" placeholder="Enter password" id="password"
-                                    name="password" required>
-                                <span class="text-danger error-text password_error"></span>
+
+                            <div class="form-group row">
+                                <label for="location" class="col-sm-3 col-form-label">Location</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="location" name="location"
+                                        placeholder="Enter location" required>
+                                    <span class="text-danger error-text location_error"></span>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="confirmPassword">Confirm Password</label>
-                                <input type="password" class="form-control" placeholder="Enter confirm password"
-                                    id="confirmPassword" name="password_confirmation" required>
-                                <span class="text-danger error-text password_confirmation_error"></span>
+
+                            <div class="form-group row">
+                                <label for="startTime" class="col-sm-3 col-form-label">Start Date & Time</label>
+                                <div class="col-sm-9">
+                                    <input type="datetime-local" class="form-control" id="startTime" name="start_time"
+                                        min="{{ now()->format('Y-m-d\TH:i') }}"/>
+                                    <span class="text-danger error-text start_time_error"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="endTime" class="col-sm-3 col-form-label">End Date & Time</label>
+                                <div class="col-sm-9">
+                                    <input type="datetime-local" class="form-control" id="endTime" name="end_time"/>
+                                    <span class="text-danger error-text end_time_error"></span>
+                                </div>
                             </div>
                         </div>
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Add Account</button>
+                            <button type="submit" class="btn btn-primary">Add Event</button>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
+
 
 
         @include('layout.footer')
@@ -143,7 +154,7 @@
     <!-- AJAX for Adding New User Account -->
     <script>
         $(document).ready(function() {
-            $('#addUserForm').on('submit', function(e) {
+            $('#addEventForm').on('submit', function(e) {
                 e.preventDefault();
 
                 let formData = new FormData(this);
@@ -152,7 +163,7 @@
                 $('span.error-text').text('');
 
                 $.ajax({
-                    url: "{{ route('add-user') }}",
+                    url: "{{ route('admin.events.create') }}",
                     method: 'POST',
                     data: formData,
                     contentType: false,
@@ -160,13 +171,13 @@
                     success: function(response) {
                         if (response.success === true) {
                             // ✅ Close modal
-                            $('#addAccountModal').modal('hide');
+                            $('#addEventModal').modal('hide');
 
                             // ✅ Reset form
-                            $('#addUserForm')[0].reset();
+                            $('#addEventForm')[0].reset();
 
                             // ✅ Show success toast
-                            toastr.success('User account has been registered successfully!');
+                            toastr.success('Event has been created successfully!');
                             location.reload();
 
                         } else {
@@ -213,8 +224,6 @@
             @endif
         });
     </script>
-
-
 
     <!-- Optional: Toastr config -->
     <script>

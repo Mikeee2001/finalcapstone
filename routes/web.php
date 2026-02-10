@@ -6,10 +6,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SignupController;
+use App\Http\Controllers\Admin\EventController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\Admin\IndexController as AdminIndexController;
 use App\Http\Controllers\Employer\IndexController as EmployerIndexController;
 use App\Http\Controllers\Jobseeker\IndexController as JobseekerIndexController;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
 /*
@@ -68,8 +69,15 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 Route::prefix('admin')->middleware(['auth', 'verified', 'checkRole:admin'])->group(function () {
 Route::get('/dashboard', [AdminIndexController::class, 'index'])->name('admin.dashboard');
 Route::get('/user-list', [AdminIndexController::class, 'userList'])->name('admin.user-list');
-Route::post('/add-user', [AdminIndexController::class, 'addUser'])->name('admin.add-user');
+Route::post('/add-user', [AdminIndexController::class, 'addUser'])->name('add-user');
 Route::delete('/delete-user/{id}', [AdminIndexController::class, 'deleteUser'])->name('admin.delete-user');
+
+// Event Routes
+Route::get('/events', [EventController::class, 'index'])->name('admin.events');
+Route::post('/events/create', [EventController::class, 'createEvents'])->name('admin.events.create');
+
+
+
 });
 
 
