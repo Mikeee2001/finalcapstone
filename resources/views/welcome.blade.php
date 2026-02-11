@@ -5,10 +5,10 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
     <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     <link rel="stylesheet" href="css1/responsive-style.css">
-
 </head>
 <!-- Updated Header Section -->
 <header class="header_wrapper">
@@ -54,69 +54,69 @@
 
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">
 
-<div class="container">
+    <div class="container">
 
-    <section id="home">
-        <h3>Jobs</h3>
-        <p>Job listings here...</p>
-    </section>
+        <section id="home">
+            <h3>Jobs</h3>
+            <p>Job listings here...</p>
+        </section>
 
-    <section id="company">
-        <h3>Company</h3>
-        <p>Company info here...</p>
-    </section>
+        <section id="company">
+            <h3>Company</h3>
+            <p>Company info here...</p>
+        </section>
 
-    <section id="events">
-        <h3>Events</h3>
-        <p>Events here...</p>
-    </section>
+        <section id="events">
+            <h3>Events</h3>
+            <p>Events here...</p>
+        </section>
 
-    @include('about')
-</div>
+        @include('about')
+    </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script><!-- jQuery -->
-<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-<!-- Bootstrap 4 -->
-<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<!-- AdminLTE App -->
-<script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script><!-- jQuery -->
+    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 
-<script src="js/main.js"></script>
+    <script src="js/main.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        @if (session('success'))
-            Swal.fire({
-                icon: 'success',
-                title: 'Success!',
-                text: '{{ session('success') }}',
-                confirmButtonText: 'OK'
-            });
-        @endif
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if (session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: '{{ session('success') }}',
+                    confirmButtonText: 'OK'
+                });
+            @endif
 
-        @if (session('error'))
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: '{{ session('error') }}',
-                confirmButtonText: 'Try Again'
-            });
-        @endif
-    });
+            @if (session('error'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: '{{ session('error') }}',
+                    confirmButtonText: 'Try Again'
+                });
+            @endif
+        });
 
-    // JavaScript to toggle navbar on scroll
-    document.addEventListener("scroll", function() {
-        const navbar = document.querySelector(".header_wrapper .navbar");
-        if (window.scrollY > 50) {
-            navbar.classList.add("header-scrolled");
-        } else {
-            navbar.classList.remove("header-scrolled");
-        }
-    });
-</script>
+        // JavaScript to toggle navbar on scroll
+        document.addEventListener("scroll", function() {
+            const navbar = document.querySelector(".header_wrapper .navbar");
+            if (window.scrollY > 50) {
+                navbar.classList.add("header-scrolled");
+            } else {
+                navbar.classList.remove("header-scrolled");
+            }
+        });
+    </script>
 
 </body>
 

@@ -75,8 +75,9 @@ Route::delete('/delete-user/{id}', [AdminIndexController::class, 'deleteUser'])-
 // Event Routes
 Route::get('/events', [EventController::class, 'index'])->name('admin.events');
 Route::post('/events/create', [EventController::class, 'createEvents'])->name('admin.events.create');
-
-
+Route::get('/events/calendar', [EventController::class, 'showCalendar'])->name('admin.events-calendar');
+Route::delete('/events/delete/{id}', [EventController::class, 'deleteEvents'])->name('admin.delete-event');
+Route::get('/get-events', [EventController::class, 'getEvents'])->name('admin.get-events');
 
 });
 

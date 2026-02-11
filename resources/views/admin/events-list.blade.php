@@ -55,16 +55,17 @@
                                             <td>{{ $event->end_time }}</td>
                                             <td>{{ $event->status }}</td>
                                             <td>
-                                                <form>
-                                            <td action="{{ route('admin.delete-event', $event->id) }}" method="POST"
-                                                style="display:inline;"
-                                                onsubmit="return confirm('Are you sure you want to delete this event?');">
-
-                                                @csrf
-                                                @method('DELETE')
-
+                                                <a href="#', $event->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                                <form action="{{ route('admin.delete-event', $event->id) }}"
+                                                    method="POST" style="display:inline;"
+                                                    onsubmit="return confirm('Are you sure you want to delete this event?');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm">Delete
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </form>
                                             </td>
-                                            </form>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -122,7 +123,7 @@
                                 <label for="startTime" class="col-sm-3 col-form-label">Start Date & Time</label>
                                 <div class="col-sm-9">
                                     <input type="datetime-local" class="form-control" id="startTime" name="start_time"
-                                        min="{{ now()->format('Y-m-d\TH:i') }}"/>
+                                        min="{{ now()->format('Y-m-d\TH:i') }}" />
                                     <span class="text-danger error-text start_time_error"></span>
                                 </div>
                             </div>
@@ -130,9 +131,31 @@
                             <div class="form-group row">
                                 <label for="endTime" class="col-sm-3 col-form-label">End Date & Time</label>
                                 <div class="col-sm-9">
-                                    <input type="datetime-local" class="form-control" id="endTime" name="end_time"/>
+                                    <input type="datetime-local" class="form-control" id="endTime" name="end_time" />
                                     <span class="text-danger error-text end_time_error"></span>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="status" class="col-sm-3 col-form-label">Status</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="status" name="status" required>
+                                    <option value="upcoming">Upcoming</option>
+                                    <option value="ongoing">Ongoing</option>
+                                    <option value="completed">Completed</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="color" class="col-sm-3 col-form-label">Color</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="color" name="color" required>
+                                    <option value="purple">Purple</option>
+                                    <option value="red">Red</option>
+                                    <option value="green">Green</option>
+                                </select>
                             </div>
                         </div>
 
