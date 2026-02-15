@@ -36,12 +36,30 @@ class Events extends Model
             $event->color = self::mapStatusToColor($event->status);
         });
     }
+
+    public function getAutoColorAttribute()
+    {
+        return self::mapStatusToColor($this->auto_status);
+    }
+
+    public function getAutoStatusAttribute()
+    {
+        $now = now();
+        if ($now->lt($this->start_time)) {
+            return 'upcoming';
+        } elseif ($now->between($this->start_time, $this->end_time)) {
+            return 'ongoing';
+        } else {
+            return 'completed';
+        }
+    }
+
     private static function mapStatusToColor($status)
     {
         return match ($status) { 'completed' => 'green',
             'ongoing' => 'red',
             'upcoming' => 'purple',
-            default => 'gray',
+            default => 'purple',
         };
     }
 }

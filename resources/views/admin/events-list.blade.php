@@ -31,7 +31,7 @@
                             </button>
                         </div>
                         <div class="card-body">
-                            <table id="eventTable" class="table table-sm table-bordered table-striped">
+                            <table id="eventsTable" class="table table-sm table-bordered table-striped">
                                 <thead>
                                     <tr class="text-center">
                                         <th>No.</th>
@@ -79,9 +79,10 @@
         <!-- Modal for Adding New Events -->
         <div class="modal fade" id="addEventModal" tabindex="-1" role="dialog" aria-labelledby="addEventModalLabel"
             aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
 
+                    <!-- Header -->
                     <div class="modal-header">
                         <h5 class="modal-title" id="addEventModalLabel">Add New Event</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -89,10 +90,12 @@
                         </button>
                     </div>
 
+                    <!-- Form -->
                     <form id="addEventForm" class="form-horizontal">
                         @csrf
                         <div class="modal-body">
 
+                            <!-- Event Name -->
                             <div class="form-group row">
                                 <label for="eventName" class="col-sm-3 col-form-label">Event Name</label>
                                 <div class="col-sm-9">
@@ -102,6 +105,7 @@
                                 </div>
                             </div>
 
+                            <!-- Description -->
                             <div class="form-group row">
                                 <label for="description" class="col-sm-3 col-form-label">Description</label>
                                 <div class="col-sm-9">
@@ -110,6 +114,7 @@
                                 </div>
                             </div>
 
+                            <!-- Location -->
                             <div class="form-group row">
                                 <label for="location" class="col-sm-3 col-form-label">Location</label>
                                 <div class="col-sm-9">
@@ -119,46 +124,52 @@
                                 </div>
                             </div>
 
+                            <!-- Start Date & Time -->
                             <div class="form-group row">
                                 <label for="startTime" class="col-sm-3 col-form-label">Start Date & Time</label>
                                 <div class="col-sm-9">
                                     <input type="datetime-local" class="form-control" id="startTime" name="start_time"
-                                        min="{{ now()->format('Y-m-d\TH:i') }}" />
+                                        min="{{ now()->format('Y-m-d\TH:i') }}" required>
                                     <span class="text-danger error-text start_time_error"></span>
                                 </div>
                             </div>
 
+                            <!-- End Date & Time -->
                             <div class="form-group row">
                                 <label for="endTime" class="col-sm-3 col-form-label">End Date & Time</label>
                                 <div class="col-sm-9">
-                                    <input type="datetime-local" class="form-control" id="endTime" name="end_time" />
+                                    <input type="datetime-local" class="form-control" id="endTime" name="end_time"
+                                        required>
                                     <span class="text-danger error-text end_time_error"></span>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="status" class="col-sm-3 col-form-label">Status</label>
-                            <div class="col-sm-9">
-                                <select class="form-control" id="status" name="status" required>
-                                    <option value="upcoming">Upcoming</option>
-                                    <option value="ongoing">Ongoing</option>
-                                    <option value="completed">Completed</option>
-                                </select>
+                            <!-- Status -->
+                            <div class="form-group row">
+                                <!-- Status -->
+                                <label for="status" class="col-sm-3 col-form-label">Status</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control" id="status" name="status" required>
+                                        <option value="upcoming">Upcoming</option>
+                                        <option value="ongoing">Ongoing</option>
+                                        {{-- <option value="completed">Completed</option> --}}
+                                    </select>
+                                </div>
+
+                                <!-- Color -->
+                                <label for="color" class="col-sm-3 col-form-label">Color</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control" id="color" name="color" required>
+                                        <option value="red">Red</option>
+                                        <option value="purple">Purple</option>
+                                        {{-- <option value="green">Green</option> --}}
+                                    </select>
+                                </div>
                             </div>
+
                         </div>
 
-                        <div class="form-group row">
-                            <label for="color" class="col-sm-3 col-form-label">Color</label>
-                            <div class="col-sm-9">
-                                <select class="form-control" id="color" name="color" required>
-                                    <option value="purple">Purple</option>
-                                    <option value="red">Red</option>
-                                    <option value="green">Green</option>
-                                </select>
-                            </div>
-                        </div>
-
+                        <!-- Footer -->
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Add Event</button>
@@ -169,10 +180,9 @@
             </div>
         </div>
 
-
-
-        @include('layout.footer')
     </div>
+
+    @include('layout.footer')
 
     <!-- AJAX for Adding New User Account -->
     <script>
@@ -223,6 +233,22 @@
         });
     </script>
 
+    {{-- Events List Page Script --}}
+    <script>
+        $(document).ready(function() {
+            $('#eventsTable').DataTable({
+                paging: true,
+                searching: true,
+                ordering: true,
+                columnDefs: [{
+                    orderable: false,
+                    targets: 5
+                }]
+            });
+        });
+    </script>
+
+
 
     <!-- Include DataTables CSS and JS -->
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
@@ -257,6 +283,50 @@
             "timeOut": "5000"
         };
     </script>
+
+    {{-- Color and Status Synchronization Script --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const statusSelect = document.getElementById('status');
+            const colorSelect = document.getElementById('color');
+
+            function updateColors() {
+                const status = statusSelect.value;
+
+                colorSelect.innerHTML = ''; // clear existing options
+
+                if (status === 'completed') {
+                    colorSelect.innerHTML = '<option value="green">Green</option>';
+                } else if (status === 'ongoing') {
+                    colorSelect.innerHTML = '<option value="red">Red</option>';
+                } else if (status === 'upcoming') {
+                    colorSelect.innerHTML = '<option value="purple">Purple</option>';
+                }
+            }
+            // Run once on load
+            updateColors();
+            // Update whenever status changes
+            statusSelect.addEventListener('change', updateColors);
+        });
+    </script>
+
+    {{-- Start and End Time Validation Script --}}
+    <Script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const startInput = document.getElementById('startTime');
+            const endInput = document.getElementById('endTime');
+
+            startInput.addEventListener('change', function() {
+                // Set the minimum end time to the selected start time
+                endInput.min = startInput.value;
+
+                // If end time is earlier than start time, reset it
+                if (endInput.value && endInput.value < startInput.value) {
+                    endInput.value = startInput.value;
+                }
+            });
+        });
+    </Script>
 
 </body>
 

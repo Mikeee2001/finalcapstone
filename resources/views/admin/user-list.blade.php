@@ -31,7 +31,7 @@
                             </button>
                         </div>
                         <div class="card-body">
-                            <table id="userTable" class="table table-bordered table-striped">
+                            <table id="usersTable" class="table table-bordered table-striped">
                                 <thead>
                                     <tr class="text-center">
 
@@ -46,7 +46,7 @@
                                 <tbody>
                                     @foreach ($users as $user)
                                         <tr class="text-center">
-                                           
+
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $user->full_name }}</td>
                                             <td>{{ $user->email }}</td>
@@ -189,6 +189,19 @@
         });
     </script>
 
+    <script>
+        $(document).ready(function() {
+            $('#usersTable').DataTable({
+                paging: true,
+                searching: true,
+                ordering: true,
+                columnDefs: [{
+                    orderable: false,
+                    targets: 5
+                }]
+            });
+        });
+    </script>
 
     <!-- Include DataTables CSS and JS -->
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">

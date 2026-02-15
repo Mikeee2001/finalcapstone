@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -12,10 +13,10 @@ class SignupController extends Controller
 {
     public function index()
     {
-        return view ('signup');
+        return view('signup');
     }
 
-    public function signup(Request $request)
+     public function signup(Request $request)
     {
         // Validate the request data
         $request->validate([

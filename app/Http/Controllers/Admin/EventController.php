@@ -42,8 +42,6 @@ class EventController extends Controller
             'start_time' => Carbon::parse($request->start_time),
             'end_time' => Carbon::parse($request->end_time),
             'description' => $request->description,
-            'status' => $request->status,
-            'color' => $request->color,
             'user_id' => auth()->id(),
         ]);
 
@@ -67,7 +65,7 @@ class EventController extends Controller
         return view('admin.events-calendar');
     }
 
-    public function getEvents()
+    public function getEventsData()
     {
         $events = Events::all()->map(function ($event) {
             return [
@@ -75,10 +73,28 @@ class EventController extends Controller
                 'title' => $event->event_name,
                 'start' => $event->start_time,
                 'end' => $event->end_time,
-                'color' => $event->color,
+                'status' => $event->auto_status,
+                'color' => $event->auto_color,
             ];
         })->values();
 
         return response()->json($events);
     }
+
+    public function updateEvent(Request $request, $id)
+    {
+        $event = Events::findOrFail($id);
+
+        $validator = Validator::make($request->all(), [
+            'event_name' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+            'start_time' => 'required|date|after_or_equal:today',
+            'end_time' => 'required|date|after_or_equal:start_time',
+            'description' => 'nullable|string',
+            'status' => 'required|in:upcoming,ongoing,completed',
+            'color' => 'required|in:purple,red,green',
+        ]);
+
+    }
+
 }

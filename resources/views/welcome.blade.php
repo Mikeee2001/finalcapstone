@@ -4,8 +4,9 @@
     <title>Employment System Capstone</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 
     <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     <link rel="stylesheet" href="css1/responsive-style.css">
@@ -55,6 +56,13 @@
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">
 
     <div class="container">
+
+        <div>
+            <section id="Banner">
+                <h3>Banner</h3>
+                <p>Banner here...</p>
+            </section>
+        </div>
 
         <section id="home">
             <h3>Jobs</h3>
