@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\CompanyDetails;
 use App\Models\Events;
 use App\Models\JobPosts;
 use App\Models\User;
-use Faker\Provider\ar_EG\Company;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class IndexController extends Controller
@@ -44,7 +44,7 @@ class IndexController extends Controller
         return redirect()->route('signin')->with('error', 'No active session found.');
     }
 
-      public function addUser(Request $request)
+    public function addUser(Request $request)
     {
         $validate = Validator::make(request()->all(), [
             'full_name' => 'required|string|max:255',
@@ -90,6 +90,57 @@ class IndexController extends Controller
         return redirect()
             ->route('admin.user-list')
             ->with('success', 'User deleted successfully!');
+    }
+
+    public function adminSettings()
+    {
+        return view('admin.layouts.settings');
+    }
+    public function adminChangePassword(Request $request)
+    {
+        // Validate incoming request data
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => [
+                'required',
+                'regex:/^(?=.*[a-zA-Z])(?=.*\d).{6,}$/',
+            ],
+            'confirm_password' => 'required|same:new_password',
+        ]);
+
+        $user = auth()->user();
+
+        // Check if the current password is correct
+        if (!Hash::check($request->current_password, $user->password)) {
+            return response()->json([
+                'errors' => ['current_password' => ['Incorrect current password']]
+            ], 422);
+        }
+
+        // Update the user's password
+        $user->update(['password' => Hash::make($request->new_password)]);
+
+        // Return a success response
+        return response()->json(['message' => 'Password changed successfully!']);
+    }
+
+    public function editAdminProfile(Request $request)
+    {
+        $request->validate([
+            'full_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'address' => 'required|string|max:255',
+        ]);
+
+        $user = Auth::user();
+
+        $user->update([
+            'full_name' => $request->full_name,
+            'email' => $request->email,
+            'address' => $request->address,
+        ]);
+
+        return redirect()->back()->with('success', 'Successfully Updated');
     }
 }
 

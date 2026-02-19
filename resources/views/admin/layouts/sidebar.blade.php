@@ -69,12 +69,13 @@
                 </li>
 
                 <!-- Settings -->
-                {{-- <li class="nav-item menu-open" style="margin-bottom: 10px;">
-            <a href="{{ route('admin.settings') }}" class="nav-link {{ Route::is('admin.settings') ? 'active' : '' }}">
-                <i class="nav-icon fas fa-cog"></i>
-                <p>Settings</p>
-            </a>
-        </li> --}}
+                <li class="nav-item menu-open" style="margin-bottom: 10px;">
+                    <a href="{{ route('admin.settings') }}"
+                        class="nav-link {{ Route::is('admin.settings') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-cog"></i>
+                        <p>Settings</p>
+                    </a>
+                </li>
 
                 <!-- Logout -->
                 <li class="nav-item menu-open" style="margin-bottom: 10px;">

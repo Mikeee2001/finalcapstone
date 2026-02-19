@@ -40,7 +40,7 @@
                                         <th>Location</th>
                                         <th>Start Time</th>
                                         <th>End Time</th>
-                                        <th>Status</th>
+                                        <th>Color</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -53,7 +53,12 @@
                                             <td>{{ $event->location }}</td>
                                             <td>{{ $event->start_time }}</td>
                                             <td>{{ $event->end_time }}</td>
-                                            <td>{{ $event->status }}</td>
+                                            <td>
+                                                <span class="badge"
+                                                    style=" font-size: 3rem; background-color:{{ $event->color }}; color: #fff;">
+                                                    {{ ucfirst($event->status) }}
+                                                </span>
+                                            </td>
                                             <td>
                                                 <a href="#', $event->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                                 <form action="{{ route('admin.delete-event', $event->id) }}"
@@ -144,26 +149,13 @@
                                 </div>
                             </div>
 
-                            <!-- Status -->
+                            {{-- Color --}}
                             <div class="form-group row">
-                                <!-- Status -->
-                                <label for="status" class="col-sm-3 col-form-label">Status</label>
-                                <div class="col-sm-3">
-                                    <select class="form-control" id="status" name="status" required>
-                                        <option value="upcoming">Upcoming</option>
-                                        <option value="ongoing">Ongoing</option>
-                                        {{-- <option value="completed">Completed</option> --}}
-                                    </select>
-                                </div>
-
-                                <!-- Color -->
                                 <label for="color" class="col-sm-3 col-form-label">Color</label>
-                                <div class="col-sm-3">
-                                    <select class="form-control" id="color" name="color" required>
-                                        <option value="red">Red</option>
-                                        <option value="purple">Purple</option>
-                                        {{-- <option value="green">Green</option> --}}
-                                    </select>
+                                <div class="col-sm-9">
+                                    <input type="color" class="form-control" id="color" name="color"
+                                        value="#007BFF" required>
+                                    <span class="text-danger error-text color_error"></span>
                                 </div>
                             </div>
 
@@ -282,32 +274,6 @@
             "positionClass": "toast-top-right",
             "timeOut": "5000"
         };
-    </script>
-
-    {{-- Color and Status Synchronization Script --}}
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const statusSelect = document.getElementById('status');
-            const colorSelect = document.getElementById('color');
-
-            function updateColors() {
-                const status = statusSelect.value;
-
-                colorSelect.innerHTML = ''; // clear existing options
-
-                if (status === 'completed') {
-                    colorSelect.innerHTML = '<option value="green">Green</option>';
-                } else if (status === 'ongoing') {
-                    colorSelect.innerHTML = '<option value="red">Red</option>';
-                } else if (status === 'upcoming') {
-                    colorSelect.innerHTML = '<option value="purple">Purple</option>';
-                }
-            }
-            // Run once on load
-            updateColors();
-            // Update whenever status changes
-            statusSelect.addEventListener('change', updateColors);
-        });
     </script>
 
     {{-- Start and End Time Validation Script --}}

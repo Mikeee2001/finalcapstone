@@ -1,15 +1,15 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\IndexController as AdminIndexController;
 
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\Employer\IndexController as EmployerIndexController;
 use App\Http\Controllers\Jobseeker\IndexController as JobseekerIndexController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SignupController;
-use App\Models\User;
 // use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +32,8 @@ Route::get('/signup', [SignupController::class, 'index'])->name('signup');
 Route::post('/signup', [SignupController::class, 'signup'])->name('signup-form');
 Route::get('/signin', [LoginController::class, 'signin'])->name('signin');
 Route::post('/signin', [LoginController::class, 'loginForm'])->name('login-form');
+
+Route::get('/employer', [EmployerIndexController::class, 'employerLandingPage'])->name('employer');
 
 // Email sending validator
 Route::get('/email/verify/{id}/{hash}', function ($id, $hash) {
@@ -74,6 +76,12 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'checkRole:admin'])->gro
     Route::get('/user-list', [AdminIndexController::class, 'userList'])->name('admin.user-list');
     Route::post('/add-user', [AdminIndexController::class, 'addUser'])->name('add-user');
     Route::delete('/delete-user/{id}', [AdminIndexController::class, 'deleteUser'])->name('admin.delete-user');
+
+    // Settings Route
+    Route::get('/settings', [AdminIndexController::class, 'adminSettings'])->name('admin.settings');
+    Route::post('/settings', [AdminIndexController::class, 'editAdminProfile'])->name('admin.update-profile');
+    Route::post('/settings/change-password', [AdminIndexController::class, 'adminChangePassword'])->name('admin.change-password');
+
 
     // Event Routes
     Route::get('/events', [EventController::class, 'index'])->name('admin.events');

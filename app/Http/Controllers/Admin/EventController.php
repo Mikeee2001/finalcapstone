@@ -24,10 +24,8 @@ class EventController extends Controller
             'location' => 'required|string|max:255',
             'start_time' => 'required|date|after_or_equal:today',
             'end_time' => 'required|date|after_or_equal:start_time',
+            'color' => 'required|string',
             'description' => 'nullable|string',
-            'status' => 'required|in:upcoming,ongoing,completed',
-            'color' => 'required|in:purple,red,green',
-
         ]);
 
         if ($validator->fails()) {
@@ -42,6 +40,7 @@ class EventController extends Controller
             'start_time' => Carbon::parse($request->start_time),
             'end_time' => Carbon::parse($request->end_time),
             'description' => $request->description,
+            'color' => $request->color,
             'user_id' => auth()->id(),
         ]);
 
@@ -73,8 +72,7 @@ class EventController extends Controller
                 'title' => $event->event_name,
                 'start' => $event->start_time,
                 'end' => $event->end_time,
-                'status' => $event->auto_status,
-                'color' => $event->auto_color,
+                'color' => $event->color,
             ];
         })->values();
 
@@ -91,10 +89,10 @@ class EventController extends Controller
             'start_time' => 'required|date|after_or_equal:today',
             'end_time' => 'required|date|after_or_equal:start_time',
             'description' => 'nullable|string',
-            'status' => 'required|in:upcoming,ongoing,completed',
-            'color' => 'required|in:purple,red,green',
         ]);
 
-    }
+        if ($validator->fails()) {
 
+        }
+    }
 }

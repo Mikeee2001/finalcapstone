@@ -15,8 +15,8 @@ return new class extends Migration {
 
             $table->string('address');
             $table->integer('expected_salary');
-            $table->text('application_letter');
-            $table->text('resume');
+            $table->string('application_letter');
+            $table->string('resume');
             $table->enum('job_type',['full-time','part-time']);
             $table->timestamps();
 

@@ -6,18 +6,18 @@
 
             <div class="col-md-6">
 
-                <p>
+                <p style="text-align: justify">
                     Our Employment System is a web-based platform designed to connect job seekers with employers through
                     an intelligent job matching process. The system evaluates skills, job preferences, salary expectations,
                     and location to generate an accurate match percentage for every available job.
                 </p>
 
-                <p>
+                <p style="text-align: justify">
                     Job seekers can create profiles, add skills, and receive personalized job recommendations, while
                     employers can post job openings, manage applications, and find qualified candidates efficiently.
                 </p>
 
-                <p>
+                <p style="text-align: justify">
                     By using a matching percentage system, we help users make informed decisions and reduce the time spent
                     searching for suitable opportunities.
                 </p>

@@ -31,4 +31,9 @@ class IndexController extends Controller
         // If no user is authenticated, just redirect
         return redirect()->route('signin')->with('error', 'No active session found.');
     }
+
+    public function employerLandingPage()
+    {
+        return view('employer.employer-page');
+    }
 }

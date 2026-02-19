@@ -52,7 +52,6 @@
                 <br>
                 <label for="" class="sub-text">Don't have an account? </label>
                 <a href="{{ route('signup') }}" class="hover-link1">Sign Up</a>
-
                 <br><br><br>
             </div>
         </div>

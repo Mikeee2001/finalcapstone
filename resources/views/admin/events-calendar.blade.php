@@ -45,7 +45,7 @@
                                     <div id="calendar"></div>
 
                                     <!-- Legend (horizontal, below calendar) -->
-                                    <div class="mt-4 d-flex justify-content-center align-items-center">
+                                    {{-- <div class="mt-4 d-flex justify-content-center align-items-center">
                                         <strong class="mr-3">Legend:</strong>
                                         <span class="badge"
                                             style="background-color: green; color: #fff; padding: 8px; margin-right: 15px;">
@@ -59,7 +59,7 @@
                                             style="background-color: purple; color: #fff; padding: 8px;">
                                             Upcoming
                                         </span>
-                                    </div>
+                                    </div> --}}
 
                                 </div>
                             </div>
