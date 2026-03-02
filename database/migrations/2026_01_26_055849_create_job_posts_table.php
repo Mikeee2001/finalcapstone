@@ -20,6 +20,7 @@ return new class extends Migration
             $table->decimal('salary_max', 10, 2);
             $table->enum('job_type', ['full-time', 'part-time']);
             $table->timestamp('date_posted');
+            $table->enum('status', ['active', 'inactive']);
 
             $table->foreignId('company_id')->constrained('company_details')->onDelete('cascade');
         });

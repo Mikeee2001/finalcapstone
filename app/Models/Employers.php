@@ -11,19 +11,18 @@ class Employers extends Model
 {
     use HasFactory;
 
-    protected $table = 'employers';
+    protected $table = 'employer';
 
     protected $fillable = [
         'user_id'
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
     public function companyDetails()
     {
         return $this->hasOne(CompanyDetails::class, 'employer_id');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

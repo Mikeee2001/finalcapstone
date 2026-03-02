@@ -341,21 +341,13 @@ input[type="search"]:focus {
 .menu-icon-doctor {
   background-image: url("../img/icons/dentist.png");
 }
-.menu-icon-schedule {
-  background-image: url("../img/icons/schedule.png");
-}
-.menu-icon-appoinment {
-  background-image: url("../img/icons/appointment.png");
-}
+
+
 .menu-icon-patient {
   background-image: url("../img/icons/patient.png");
 }
 .menu-icon-settings {
   background-image: url("../img/icons/setting.png");
-}
-
-.menu-icon-session {
-  background-image: url("../img/icons/schedule.png");
 }
 .menu-icon-home {
   background-image: url("../img/icons/home.png");

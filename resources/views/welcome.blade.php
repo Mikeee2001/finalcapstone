@@ -45,7 +45,7 @@
                         <a class="nav-link fill-btn main-btn" href="{{ route('signin') }}">Sign in</a>
                     </li>
                     <li class="nav-item ms-lg-2">
-                        <a class="nav-link main-btn" href="{{ route('signup') }}">Sign up</a>
+                        <a class="signup nav-link main-btn" href="{{ route( 'employer') }}">Employer Site</a>
                     </li>
                 </ul>
             </div>
@@ -55,14 +55,38 @@
 
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">
 
-    <div class="container">
+    <section id="home" class="home">
+        <div class="banner_wrapper wrapper">
+            <div class="container">
+                <div class="row align-items-center">
 
-        <div>
-            <section id="Banner">
-                <h3>Banner</h3>
-                <p>Banner here...</p>
-            </section>
+                    <!-- Left side: text -->
+                    <div class="col-md-6 order-md-1 order-2">
+                        <h3>Better Opportunities Through</h3>
+                        <h1>Smart Employment Matching</h1>
+                        <p>
+                            Discover a modern employment system designed to connect job seekers with the right
+                            employers. Our intelligent matching process evaluates skills, preferences, and location to
+                            help you find opportunities that truly fit your career goals.
+                        </p>
+                        <div class="mt-4 d-flex flex-wrap">
+                            <a href="{{ route('signup') }}" class="main-btn fill-btn me-3 mb-2">Apply Now</a>
+                            <a href="#about" class="main-btn mb-2">About</a>
+                        </div>
+                    </div>
+
+                    <!-- Right side: image -->
+                    <div id="image" class="col-md-6 order-md-2 order-1 mb-md-0 mb-5 text-center">
+                        <img class="img-fluid aimg1" src="{{ asset('images/2.png') }}" alt="Employment illustration">
+                    </div>
+
+                </div>
+            </div>
         </div>
+    </section>
+
+
+    <div class="container">
 
         <section id="home">
             <h3>Jobs</h3>
@@ -79,9 +103,8 @@
             <p>Events here...</p>
         </section>
 
-        {{-- <h2 class="text-center mb-4 text-dark">About Us</h2> --}}
         <section id="about" class="py-5 bg-light">
-
+            {{-- <h2 class="text-center mb-4 text-dark">About Us</h2> --}}
             <div class="container">
                 <div class="row align-items-center">
 
@@ -118,28 +141,36 @@
 
                 <hr class="my-4">
 
-                <div class="row text-center">
+                <section id="">
+                    <div class="row text-center">
+                        <div class="col-md-4">
+                            <h5>🎯 Our Mission</h5>
+                            <p>To simplify job searching and hiring by providing accurate job matches based on real
+                                qualifications.</p>
+                        </div>
 
-                    <div class="col-md-4">
-                        <h5>🎯 Our Mission</h5>
-                        <p>To simplify job searching and hiring by providing accurate job matches based on real
-                            qualifications.</p>
+                        <div class="col-md-4">
+                            <h5>🚀 Our Vision</h5>
+                            <p>To become a trusted employment platform that empowers individuals and businesses.</p>
+                        </div>
+
+                        <div class="col-md-4">
+                            <h5>🤝 Our Values</h5>
+                            <p>Transparency, efficiency, and user-focused design.</p>
+                        </div>
                     </div>
-
-                    <div class="col-md-4">
-                        <h5>🚀 Our Vision</h5>
-                        <p>To become a trusted employment platform that empowers individuals and businesses.</p>
-                    </div>
-
-                    <div class="col-md-4">
-                        <h5>🤝 Our Values</h5>
-                        <p>Transparency, efficiency, and user-focused design.</p>
-                    </div>
-
-                </div>
+                </section>
 
             </div>
         </section>
+        <div>
+            <section class="cta py-3 text-center text-white" style="background:#00A3C8;">
+                <div class="container">
+                    <h2>Ready to Find Your Next Opportunity?</h2> <a href="{{ route('signup') }}"
+                        class="main-btn fill-btn me-3 mb-2">Get Started</a>
+                </div>
+            </section>
+        </div>
 
     </div>
 

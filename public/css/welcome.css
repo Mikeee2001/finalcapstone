@@ -30,6 +30,82 @@
     --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
+.banner_wrapper {
+    background-color: #00A3C8;
+    /* consistent blue background */
+    padding: 80px 0;
+    color: #fff;
+}
+
+.banner_wrapper h1 {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.banner_wrapper h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.banner_wrapper p {
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 500px;
+}
+
+/* Image styling */
+.image {
+    width: 100px;
+    max-width: 850px;
+    height: auto;
+    display: inline-block;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+}
+
+.image {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+@media (max-width: 992px) {
+  .aimg1 {
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 768px) {
+  .aimg1 {
+    max-width: 100%;
+  }
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .banner_wrapper {
+        padding: 40px 0;
+        text-align: center;
+    }
+
+    .banner_wrapper h1 {
+        font-size: 32px;
+    }
+
+    .banner_wrapper h3 {
+        font-size: 20px;
+    }
+
+    .banner_wrapper p {
+        font-size: 14px;
+        max-width: 100%;
+    }
+}
+
+
 body {
     font-family: var(--primary-font);
     background-color: var(--bg-white);
@@ -168,9 +244,11 @@ p {
     0% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(1.25rem);
     }
+
     100% {
         transform: translateY(0);
     }
@@ -178,7 +256,7 @@ p {
 
 /* Header */
 .header_wrapper .navbar {
-    padding: 15px 0;
+    padding: 5px 0;
     background-color: transparent;
     transition: all 0.3s ease-in-out;
 }
@@ -196,7 +274,7 @@ p {
 }
 
 .header_wrapper .nav-item .nav-link {
-    font-size: 1.125rem;
+    font-size: 1.000rem;
     font-weight: 500;
     color: var(--primary-text);
     display: inline-block;
@@ -486,7 +564,7 @@ p {
         padding-top: 3rem;
     }
 
-    .footer_wrapper > div {
+    .footer_wrapper>div {
         padding: 0 1.875rem;
     }
 }

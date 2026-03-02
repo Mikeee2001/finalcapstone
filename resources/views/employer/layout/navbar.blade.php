@@ -11,8 +11,7 @@
         <!-- Navbar Search -->
         <li class="nav-item d-sm-inline">
             <a href="{{ route('admin.dashboard') }}" class="nav-link">
-                {{ now()->format('Y-m-d H:i:s') }} </a>
-
+            {{ \Carbon\Carbon::now('Asia/Manila')->format('F d, Y h:i A') }}
         </li>
     </ul>
 </nav>

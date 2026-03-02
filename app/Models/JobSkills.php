@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\JobPosts;
+use App\Models\Skills;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,6 +18,15 @@ class JobSkills extends Model
         'skill_id',
     ];
 
+    public function job_post()
+    {
+        return $this->belongsTo(JobPosts::class, 'job_posts_id');
+    }
+
+    public function skill()
+    {
+        return $this->belongsTo(Skills::class, 'skill_id');
+    }
 }
 
 

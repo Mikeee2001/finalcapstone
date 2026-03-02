@@ -35,27 +35,27 @@
                     </a>
                 </li>
 
-                {{-- <!-- Company List -->
-        <li class="nav-item menu-open" style="margin-bottom: 10px;">
-          <a href="{{ route('admin.company-list') }}" class="nav-link {{ Route::is('admin.company-list') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-building"></i>
-              <p>
-                  Company
-              </p>
-          </a>
-        </li>
-              </p>
-          </a>
-        </li>
-              <!-- Jobs List -->
-        <li class="nav-item menu-open" style="margin-bottom: 10px;">
-          <a href="{{ route('admin.job-list') }}" class="nav-link {{ Route::is('admin.job-list') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-briefcase"></i>
-              <p>
-                  Jobs
-              </p>
-          </a>
-        </li> --}}
+                <!-- Company List -->
+                {{-- <li class="nav-item menu-open" style="margin-bottom: 10px;">
+                    <a href="{{ route('admin.company-list') }}"
+                        class="nav-link {{ Route::is('admin.company-list') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-building"></i>
+                        <p>
+                            Company
+                        </p>
+                    </a>
+                </li> --}}
+
+                <!-- Jobs List -->
+                {{-- <li class="nav-item menu-open" style="margin-bottom: 10px;">
+                    <a href="{{ route('admin.job-list') }}"
+                        class="nav-link {{ Route::is('admin.job-list') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-briefcase"></i>
+                        <p>
+                            Jobs
+                        </p>
+                    </a>
+                </li> --}}
 
                 <!-- Jobs List -->
                 <li class="nav-item menu-open" style="margin-bottom: 10px;">

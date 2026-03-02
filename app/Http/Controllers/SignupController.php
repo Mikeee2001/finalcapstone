@@ -22,12 +22,14 @@ class SignupController extends Controller
         $request->validate([
             'full_name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed',
+            'password' => 'required|confirmed|min:8',
             'address' => 'required|string|max:255',
             'expected_salary' => 'required|numeric',
             'application_letter' => 'required|file|mimes:pdf,doc,docx,txt|max:2048',
             'resume' => 'required|file|mimes:pdf,doc,docx|max:2048',
             'job_type' => 'required|in:full-time,part-time',
+            'skills' => 'required|array',
+            'skills.*' => 'exists:skills,id',
         ]);
 
         // Create the user with status as 'inactive'
@@ -41,6 +43,7 @@ class SignupController extends Controller
         ]);
 
         if ($user) {
+
             // Store the application letter and resume files
             $applicationLetterPath = $request->file('application_letter')->move(public_path('application_letters'), time() . '_' . $request->file('application_letter')->getClientOriginalName());
             $resumePath = $request->file('resume')->move(public_path('resumes'), time() . '_' . $request->file('resume')->getClientOriginalName());
@@ -53,6 +56,9 @@ class SignupController extends Controller
                 'resume' => $resumePath,
                 'job_type' => $request->input('job_type'),
             ]);
+
+           $user->skills()->attach($request->skills);
+
         }
 
         // If the user was created, send the verification email

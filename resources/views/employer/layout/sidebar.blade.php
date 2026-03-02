@@ -1,12 +1,12 @@
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4"
-    style="position: fixed; top: 0; height: 100vh; overflow-y: auto;">
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
     <div class="sidebar">
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="user-panel mt-3 pb-3 mb-3">
             <div class="info">
                 <a href="{{ route('employer.dashboard') }}" class="d-block">Employer Dashboard</a>
             </div>
         </div>
+
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -31,9 +31,9 @@
 
                 <!-- Jobs List -->
                 <li class="nav-item menu-open" style="margin-bottom: 10px;">
-                    <a href="#" class="nav-link ">
+                    <a href="{{ route('employer.job-list') }}" class="nav-link {{ Route::is('employer.job-list') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-cog"></i>
-                        <p>Jobs</p>
+                        <p>Job Posts</p>
                     </a>
                 </li>
 

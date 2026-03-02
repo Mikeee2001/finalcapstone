@@ -15,4 +15,15 @@ class JobseekersSkills extends Model
         'jobseeker_id',
         'skill_id',
     ];
+
+    public function jobseeker()
+    {
+        return $this->belongsTo(Jobseeker::class, 'jobseeker_id');
+    }
+
+    public function skill()
+    {
+        return $this->belongsTo(Skills::class, 'skill_id');
+    }
+
 }

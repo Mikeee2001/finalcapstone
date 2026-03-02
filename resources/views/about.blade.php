@@ -1,5 +1,5 @@
- {{-- <h2 class="text-center mb-4 text-dark">About Us</h2> --}}
 <section id="about" class="py-5 bg-light">
+    <h2 class="text-center mb-4 text-dark">About Us</h2>
 
     <div class="container">
         <div class="row align-items-center">
@@ -8,7 +8,8 @@
 
                 <p style="text-align: justify">
                     Our Employment System is a web-based platform designed to connect job seekers with employers through
-                    an intelligent job matching process. The system evaluates skills, job preferences, salary expectations,
+                    an intelligent job matching process. The system evaluates skills, job preferences, salary
+                    expectations,
                     and location to generate an accurate match percentage for every available job.
                 </p>
 
@@ -18,7 +19,8 @@
                 </p>
 
                 <p style="text-align: justify">
-                    By using a matching percentage system, we help users make informed decisions and reduce the time spent
+                    By using a matching percentage system, we help users make informed decisions and reduce the time
+                    spent
                     searching for suitable opportunities.
                 </p>
             </div>
@@ -36,7 +38,8 @@
 
             <div class="col-md-4">
                 <h5>🎯 Our Mission</h5>
-                <p>To simplify job searching and hiring by providing accurate job matches based on real qualifications.</p>
+                <p>To simplify job searching and hiring by providing accurate job matches based on real qualifications.
+                </p>
             </div>
 
             <div class="col-md-4">

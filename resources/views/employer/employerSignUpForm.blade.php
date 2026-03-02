@@ -6,19 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ asset('css/signup.css') }}">
-
-
 </head>
 
 <body>
 
     <div class="main-container">
         <div class="form-container">
-            <p class="header-text">Start Creating Your User Account</p>
-            <p class="sub-text">Make Sure You Remember Your Login Information.</p>
+            <p class="header-text">Employer Sign Up Form</p>
             <div class="form-body">
 
-                <form action="{{ route('signup-form') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('employerSignup') }}" method="post" enctype="multipart/form-data">
                     @csrf
 
                     <!-- Full Name + Email -->
@@ -41,7 +38,7 @@
                         </div>
                     </div>
 
-                    <!-- Address + Expected Salary -->
+                    <!-- Address -->
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Address:</label>
@@ -50,11 +47,34 @@
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
+                    </div>
+
+                    <!-- Company Details -->
+                    <div class="form-row">
                         <div class="form-group">
-                            <label class="form-label">Expected Salary:</label>
-                            <input type="number" name="expected_salary" class="input-text"
-                                placeholder="Expected Salary" required>
-                            @error('expected_salary')
+                            <label class="form-label">Company Name:</label>
+                            <input type="text" name="company_name" class="input-text" placeholder="Company Name"
+                                required>
+                            @error('company_name')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Company Address:</label>
+                            <input type="text" name="company_address" class="input-text"
+                                placeholder="Company Address" required>
+                            @error('company_address')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Company Description:</label>
+                            <textarea name="company_description" class="input-text" placeholder="Brief description of your company" required></textarea>
+                            @error('company_description')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
@@ -80,41 +100,6 @@
                         </div>
                     </div>
 
-                    <!-- Application Letter + Resume (File Uploads) -->
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">Application Letter:</label>
-                            <input type="file" name="application_letter" class="input-text"
-                                accept=".pdf,.doc,.docx,.txt" required>
-                            @error('application_letter')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Resume:</label>
-                            <input type="file" name="resume" class="input-text" accept=".pdf,.doc,.docx" required>
-                            @error('resume')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <!-- Job Type -->
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">Job Type:</label>
-                            <select name="job_type" class="input-text" required>
-                                <option value="full-time">Full-time</option>
-                                <option value="part-time">Part-time</option>
-                            </select>
-                            @error('job_type')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    
-
                     <!-- Submit -->
                     <div class="form-row submit-row">
                         <input type="submit" value="Sign Up" class="login-btn btn-primary btn">
@@ -123,10 +108,11 @@
 
                 <div>
                     <br>
-                    <label for="" class="sub-text">Already have an account? </label>
+                    <label class="sub-text">Already have an account? </label>
                     <a href="{{ route('signin') }}" class="hover-link1">Login</a>
                     <br><br><br>
                 </div>
+
             </div>
         </div>
     </div>

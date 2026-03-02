@@ -33,7 +33,10 @@ Route::post('/signup', [SignupController::class, 'signup'])->name('signup-form')
 Route::get('/signin', [LoginController::class, 'signin'])->name('signin');
 Route::post('/signin', [LoginController::class, 'loginForm'])->name('login-form');
 
-Route::get('/employer', [EmployerIndexController::class, 'employerLandingPage'])->name('employer');
+Route::get('/employer', [EmployerIndexController::class, 'getEmployerPage'])->name('employer');
+Route::get('/employer/signup', [EmployerIndexController::class, 'getEmployerSignupForm'])->name('employersignupForm');
+Route::post('/employer/signup', [EmployerIndexController::class, 'employerSignup'])->name('employerSignup');
+
 
 // Email sending validator
 Route::get('/email/verify/{id}/{hash}', function ($id, $hash) {
@@ -91,13 +94,20 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'checkRole:admin'])->gro
     Route::get('/get-events', [EventController::class, 'getEventsData'])->name('admin.get-events');
     Route::get('/events/edit/{id}', [EventController::class, 'editEvents'])->name('admin.events.edit');
 });
+// Admin routes
 
 
 // Jobseeker Routes
 Route::get('/jobseeker/dashboard', [JobseekerIndexController::class, 'index'])->middleware(['auth', 'verified'])->name('jobseeker.dashboard');
+// Jobseeker Routes//
 
 // Employer Routes
-Route::get('/employer/dashboard', [EmployerIndexController::class, 'index'])->middleware(['auth', 'verified'])->name('employer.dashboard');
+Route::prefix('employer')->middleware(['auth', 'verified', 'checkRole:employer'])->group(function () {
+Route::get('/dashboard', [EmployerIndexController::class, 'index'])->name('employer.dashboard');
+Route::get('/job-list', [EmployerIndexController::class, 'getJobList'])->name('employer.job-list');
+
+});
+
 
 // Logout Routes
 Route::get('/logout/jobseeker', [Controller::class, 'logout'])->name('jobseeker.logout');
