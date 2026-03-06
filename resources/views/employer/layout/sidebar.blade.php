@@ -7,7 +7,6 @@
             </div>
         </div>
 
-
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
@@ -33,7 +32,7 @@
                 <li class="nav-item menu-open" style="margin-bottom: 10px;">
                     <a href="{{ route('employer.job-list') }}" class="nav-link {{ Route::is('employer.job-list') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-cog"></i>
-                        <p>Job Posts</p>
+                        <p>Manage Jobs</p>
                     </a>
                 </li>
 
@@ -50,7 +49,7 @@
                 <li class="nav-item menu-open" style="margin-bottom: 10px;">
                     <a href="{{ route('employer.logout') }}" class="nav-link">
                         <i class="nav-icon fas fa-sign-out-alt"></i>
-                        <p>LOGOUT</p>
+                        <p>Logout</p>
                     </a>
                 </li>
             </ul>

@@ -20,6 +20,7 @@
 
             <form action="{{ route('login-form') }}" method="post">
                 @csrf
+
                 <div class="label-td">
                     <label for="useremail" class="form-label">Email:</label>
                 </div>
@@ -43,14 +44,19 @@
                     </span>
                 </div>
 
+                <!-- ✅ Single login button with spinner -->
                 <div>
-                    <input type="submit" value="Login" class="login-btn">
+                    <button type="submit" class="login-btn" id="loginBtn">
+                        <span id="btnText">Login</span>
+                        <span id="btnSpinner" class="spinner-border spinner-border-sm d-none" role="status"
+                            aria-hidden="true"></span>
+                    </button>
                 </div>
             </form>
 
             <div>
                 <br>
-                <label for="" class="sub-text">Don't have an account? </label>
+                <label class="sub-text">Don't have an account? </label>
                 <a href="{{ route('signup') }}" class="hover-link1">Sign Up</a>
                 <br><br><br>
             </div>
@@ -113,6 +119,23 @@
             cursor: pointer;
         }
     </style>
+
+    {{-- Loading spinner js --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector("form");
+            const loginBtn = document.getElementById("loginBtn");
+            const btnText = document.getElementById("btnText");
+            const btnSpinner = document.getElementById("btnSpinner");
+
+            form.addEventListener("submit", function() {
+                loginBtn.disabled = true;
+                btnSpinner.classList.remove("d-none");
+                btnText.textContent = "Logging in...";
+            });
+        });
+    </script>
+
 
 </body>
 

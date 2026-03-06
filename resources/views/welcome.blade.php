@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     <link rel="stylesheet" href="css1/responsive-style.css">
 </head>
+
 <!-- Updated Header Section -->
 <header class="header_wrapper">
     <nav class="navbar navbar-expand-lg">
@@ -24,8 +25,17 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item"> <a class="nav-link active margin-left text-bold" aria-current="page"
-                            href="#home">Employment System</a> </li>
+                    <li class="nav-item d-flex align-items-center">
+                        <!-- Logo -->
+                        <img src="{{ asset('images/oip.png') }}" alt="Logo" class="logo me-2">
+
+                        <!-- Text -->
+                        <a class="nav-link active margin-left text-bold" aria-current="page"
+                            href="{{ route('welcome') }}">
+                            Employment System
+                        </a>
+                    </li>
+
                 </ul>
                 <ul class="navbar-nav menu-navbar-nav">
                     <li class="nav-item">
@@ -45,7 +55,7 @@
                         <a class="nav-link fill-btn main-btn" href="{{ route('signin') }}">Sign in</a>
                     </li>
                     <li class="nav-item ms-lg-2">
-                        <a class="signup nav-link main-btn" href="{{ route( 'employer') }}">Employer Site</a>
+                        <a class="signup nav-link main-btn" href="{{ route('employer') }}">Employer Site</a>
                     </li>
                 </ul>
             </div>
@@ -55,122 +65,135 @@
 
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">
 
-    <section id="home" class="home">
-        <div class="banner_wrapper wrapper">
-            <div class="container">
-                <div class="row align-items-center">
+    <!-- Hero Section -->
+    <section class="hero-section d-flex align-items-center text-center text-white"
+        style="height:100vh; background:url('{{ asset('images/office-bg.jpg') }}') center/cover;">
+        <div class="hero-overlay position-absolute w-100 h-100"
+            style="background:linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,123,255,0.6));"></div>
+        <div class="container position-relative">
+            <h1 class="display-4 fw-bold">Smart Employment Matching</h1>
+            <p class="lead">Connecting jobseekers with trusted employers</p>
+            <div class="mt-4">
+                <a href="{{ route('signup') }}" class="main-btn fill-btn me-3 mb-2">Apply Now</a>
+                <a href="#about" class="main-btn fill-btn me-3 mb-2">Learn More</a>
+            </div>
+        </div>
+    </section>
 
-                    <!-- Left side: text -->
-                    <div class="col-md-6 order-md-1 order-2">
-                        <h3>Better Opportunities Through</h3>
-                        <h1>Smart Employment Matching</h1>
-                        <p>
-                            Discover a modern employment system designed to connect job seekers with the right
-                            employers. Our intelligent matching process evaluates skills, preferences, and location to
-                            help you find opportunities that truly fit your career goals.
-                        </p>
-                        <div class="mt-4 d-flex flex-wrap">
-                            <a href="{{ route('signup') }}" class="main-btn fill-btn me-3 mb-2">Apply Now</a>
-                            <a href="#about" class="main-btn mb-2">About</a>
+    <!-- Jobs Section -->
+    <section id="jobs" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Featured Jobs</h2>
+            <div class="row">
+                {{-- @foreach ($jobs as $job) --}}
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <img src="#"
+                                    class="img-fluid mb-3" style="max-height:60px;">
+                                <h5 class="card-title">Job Title</h5>
+                                <p class="text-muted">Company Name</p>
+                                <p><strong>Salary:</strong> $job->salary_min  - salary_max</p>
+                                <span class="badge bg-info">job_type</span>
+                            </div>
+                            <div class="card-footer text-center">
+                                <a href="#" class="btn btn-primary">Apply Now</a>
+                            </div>
                         </div>
                     </div>
+                {{-- @endforeach --}}
+            </div>
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-outline-primary btn-lg">View All Jobs</a>
+            </div>
+        </div>
+    </section>
 
-                    <!-- Right side: image -->
-                    <div id="image" class="col-md-6 order-md-2 order-1 mb-md-0 mb-5 text-center">
-                        <img class="img-fluid aimg1" src="{{ asset('images/2.png') }}" alt="Employment illustration">
+    <!-- Company Section -->
+    <section id="company" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">Featured Employers</h2>
+            <div class="row">
+                {{-- @foreach ($companies as $company) --}}
+                    <div class="col-md-3 mb-4">
+                        <div class="card h-100 text-center shadow-sm">
+                            <div class="card-body">
+                                <img src="#"
+                                    class="img-fluid mb-3" style="max-height:60px;">
+                                <h5 class="card-title">Company Name</h5>
+                                <p class="text-muted">Company Address</p>
+                            </div>
+                        </div>
                     </div>
+                {{-- @endforeach --}}
+            </div>
+        </div>
+    </section>
 
+    <!-- Events Section -->
+    <section id="events" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Upcoming Events</h2>
+            <div class="row">
+                {{-- @foreach ($events as $event) --}}
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Event Title</h5>
+                                <p class="text-muted">Event Location</p>
+                                <p><strong>Date:</strong> Event Date</p>
+                                    {{-- @if (now()->between($event->start_time, $event->end_time))
+                                        <span class="badge bg-success">Ongoing</span>
+                                    @elseif(now()->lt($event->start_time))
+                                        <span class="badge bg-info">Upcoming</span>
+                                    @else
+                                        <span class="badge bg-secondary">Finished</span>
+                                    @endif --}}
+                            </div>
+                        </div>
+                    </div>
+                {{-- @endforeach --}}
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">About Us</h2>
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p>Our Employment System connects job seekers with employers through intelligent matching. We
+                        evaluate skills, preferences, salary expectations, and location to generate accurate matches.
+                    </p>
+                    <p>Employers can post jobs, manage applications, and find qualified candidates efficiently.</p>
+                </div>
+                <div class="col-md-6 text-center">
+                    <i class="fas fa-briefcase fa-6x text-primary mb-3"></i>
+                    <h5>Smart Matching • Faster Hiring • Better Opportunities</h5>
                 </div>
             </div>
         </div>
     </section>
 
-
-    <div class="container">
-
-        <section id="home">
-            <h3>Jobs</h3>
-            <p>Job listings here...</p>
-        </section>
-
-        <section id="company">
-            <h3>Company</h3>
-            <p>Company info here...</p>
-        </section>
-
-        <section id="events">
-            <h3>Events</h3>
-            <p>Events here...</p>
-        </section>
-
-        <section id="about" class="py-5 bg-light">
-            {{-- <h2 class="text-center mb-4 text-dark">About Us</h2> --}}
-            <div class="container">
-                <div class="row align-items-center">
-
-                    <div class="col-md-6">
-
-                        <p style="text-align: justify">
-                            Our Employment System is a web-based platform designed to connect job seekers with employers
-                            through
-                            an intelligent job matching process. The system evaluates skills, job preferences, salary
-                            expectations,
-                            and location to generate an accurate match percentage for every available job.
-                        </p>
-
-                        <p style="text-align: justify">
-                            Job seekers can create profiles, add skills, and receive personalized job recommendations,
-                            while
-                            employers can post job openings, manage applications, and find qualified candidates
-                            efficiently.
-                        </p>
-
-                        <p style="text-align: justify">
-                            By using a matching percentage system, we help users make informed decisions and reduce the
-                            time spent
-                            searching for suitable opportunities.
-                        </p>
-                    </div>
-
-                    <div class="col-md-6 text-center">
-                        <i class="fas fa-briefcase fa-6x text-primary mb-3"></i>
-                        <h5>Smart Matching • Faster Hiring • Better Opportunities</h5>
-                    </div>
-
-                </div>
-
-                <hr class="my-4">
-
-                <section id="">
-                    <div class="row text-center">
-                        <div class="col-md-4">
-                            <h5>🎯 Our Mission</h5>
-                            <p>To simplify job searching and hiring by providing accurate job matches based on real
-                                qualifications.</p>
-                        </div>
-
-                        <div class="col-md-4">
-                            <h5>🚀 Our Vision</h5>
-                            <p>To become a trusted employment platform that empowers individuals and businesses.</p>
-                        </div>
-
-                        <div class="col-md-4">
-                            <h5>🤝 Our Values</h5>
-                            <p>Transparency, efficiency, and user-focused design.</p>
-                        </div>
-                    </div>
-                </section>
-
-            </div>
-        </section>
-        <div>
-            <section class="cta py-3 text-center text-white" style="background:#00A3C8;">
-                <div class="container">
-                    <h2>Ready to Find Your Next Opportunity?</h2> <a href="{{ route('signup') }}"
-                        class="main-btn fill-btn me-3 mb-2">Get Started</a>
-                </div>
-            </section>
+    <!-- Call to Action -->
+    <section class="py-5 text-center text-white" style="background:#00A3C8;">
+        <div class="container">
+            <h2 class="fw-bold">Ready to Find Your Next Opportunity?</h2>
+            <a href="{{ route('signup') }}" class="btn btn-light btn-lg me-2">Sign Up as Jobseeker</a>
+            <a href="{{ route('employerSignup') }}" class="btn btn-outline-light btn-lg">Sign Up as Employer</a>
         </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; {{ date('Y') }} PESO Employment System. All rights reserved.</p>
+        <div>
+            <a href="#" class="text-white me-3">About</a>
+            <a href="#" class="text-white me-3">Contact</a>
+            <a href="#" class="text-white">Privacy Policy</a>
+        </div>
+    </footer>
 
     </div>
 

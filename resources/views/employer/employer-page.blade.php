@@ -148,7 +148,7 @@
         <div class="container">
             <h2 class="fw-bold">Start Hiring Smarter Today</h2>
             <p class="lead">Join thousands of employers who trust our platform.</p>
-            <a href="{{ route('signup') }}" class="btn btn-light btn-lg mt-3">
+            <a href="{{ route('employersignupForm') }}" class="btn btn-light btn-lg mt-3">
                 Get Started
             </a>
         </div>

@@ -1,0 +1,25 @@
+.peso-logo {
+    max-width: 150%;        /* fill most of the sidebar width */
+    height: auto;          /* keep aspect ratio */
+    max-height: 150px;     /* larger but controlled */
+    display: block;
+    margin: 0 auto;        /* center horizontally */
+    object-fit: contain;   /* ensures full logo fits */
+    background-color: #fff; /* ✅ white background to highlight text */
+    border-radius: 50%;     /* keep circular look */
+    padding: 6px;           /* spacing around logo */
+}
+
+
+/* ✅ Responsive adjustments */
+@media (max-width: 768px) {
+    .peso-logo {
+        max-height: 90px;  /* shrink on tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    .peso-logo {
+        max-height: 70px;  /* shrink further on phones */
+    }
+}

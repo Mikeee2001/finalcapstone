@@ -105,7 +105,7 @@
         </div>
     </div>
 
-    @include('layout.footer')
+    @include('admin.layouts.footer')
 </body>
 
 </html>

@@ -64,23 +64,23 @@
 }
 
 .image {
-  width: 100%;
-  max-width: 900px;
-  height: auto;
-  display: block;
-  margin: 0 auto;
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 @media (max-width: 992px) {
-  .aimg1 {
-    max-width: 80%;
-  }
+    .aimg1 {
+        max-width: 80%;
+    }
 }
 
 @media (max-width: 768px) {
-  .aimg1 {
-    max-width: 100%;
-  }
+    .aimg1 {
+        max-width: 100%;
+    }
 }
 
 
@@ -253,6 +253,14 @@ p {
         transform: translateY(0);
     }
 }
+
+.logo {
+    max-height: 45px;        /* keeps it visible but not oversized */
+    width: auto;             /* maintain aspect ratio */
+    background-color: #fff;  /* ✅ white background so text inside logo is readable */
+    padding: 4px;            /* spacing around logo */
+}
+
 
 /* Header */
 .header_wrapper .navbar {

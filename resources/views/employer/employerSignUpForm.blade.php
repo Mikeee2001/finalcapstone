@@ -3,13 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('css/signup.css') }}">
+    <title>Employer Sign Up</title>
+    <link rel="stylesheet" href="{{ asset('css/employer-signup.css') }}">
 </head>
 
 <body>
-
     <div class="main-container">
         <div class="form-container">
             <p class="header-text">Employer Sign Up Form</p>
@@ -30,8 +29,7 @@
 
                         <div class="form-group">
                             <label class="form-label">Email:</label>
-                            <input type="email" name="email" class="input-text" placeholder="Email Address"
-                                required>
+                            <input type="email" name="email" class="input-text" placeholder="Email Address" required>
                             @error('email')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -53,8 +51,7 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Company Name:</label>
-                            <input type="text" name="company_name" class="input-text" placeholder="Company Name"
-                                required>
+                            <input type="text" name="company_name" class="input-text" placeholder="Company Name" required>
                             @error('company_name')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -62,8 +59,7 @@
 
                         <div class="form-group">
                             <label class="form-label">Company Address:</label>
-                            <input type="text" name="company_address" class="input-text"
-                                placeholder="Company Address" required>
+                            <input type="text" name="company_address" class="input-text" placeholder="Company Address" required>
                             @error('company_address')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -84,16 +80,14 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Create Password:</label>
-                            <input type="password" name="password" class="input-text" placeholder="New Password"
-                                required>
+                            <input type="password" name="password" class="input-text" placeholder="New Password" required>
                             @error('password')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label class="form-label">Confirm Password:</label>
-                            <input type="password" name="password_confirmation" class="input-text"
-                                placeholder="Confirm Password" required>
+                            <input type="password" name="password_confirmation" class="input-text" placeholder="Confirm Password" required>
                             @error('password_confirmation')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -112,10 +106,8 @@
                     <a href="{{ route('signin') }}" class="hover-link1">Login</a>
                     <br><br><br>
                 </div>
-
             </div>
         </div>
     </div>
 </body>
-
 </html>

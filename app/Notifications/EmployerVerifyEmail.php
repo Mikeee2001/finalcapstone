@@ -53,7 +53,7 @@ class EmployerVerifyEmail extends Notification
             ->line('Please click the button below to verify your email and activate your account.')
             ->action('Verify Email', $verificationUrl)
             ->line('If you did not create an account, no further action is required.')
-            ->salutation('Best regards, The Employment System Team');
+            ->salutation('Best regards, The Opol Employment System Team');
     }
 
 

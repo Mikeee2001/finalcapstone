@@ -24,7 +24,7 @@
                 <li class="nav-item menu-open" style="margin-bottom: 10px;">
                     <a href="{{ route('jobseeker.logout') }}" class="nav-link">
                         <i class="nav-icon fas fa-sign-out-alt"></i>
-                        <p>LOGOUT</p>
+                        <p>Logout</p>
                     </a>
                 </li>
             </ul>

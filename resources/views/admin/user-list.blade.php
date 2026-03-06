@@ -137,70 +137,70 @@
         </div>
 
 
-        @include('layout.footer')
-    </div>
+            @include('layout.footer')
+        </div>
 
-    <!-- AJAX for Adding New User Account -->
-    <script>
-        $(document).ready(function() {
-            $('#addUserForm').on('submit', function(e) {
-                e.preventDefault();
+        <!-- AJAX for Adding New User Account -->
+        <script>
+            $(document).ready(function() {
+                $('#addUserForm').on('submit', function(e) {
+                    e.preventDefault();
 
-                let formData = new FormData(this);
+                    let formData = new FormData(this);
 
-                // Clear previous errors
-                $('span.error-text').text('');
+                    // Clear previous errors
+                    $('span.error-text').text('');
 
-                $.ajax({
-                    url: "{{ route('add-user') }}",
-                    method: 'POST',
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    success: function(response) {
-                        if (response.success === true) {
-                            // ✅ Close modal
-                            $('#addAccountModal').modal('hide');
+                    $.ajax({
+                        url: "{{ route('add-user') }}",
+                        method: 'POST',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function(response) {
+                            if (response.success === true) {
+                                // ✅ Close modal
+                                $('#addAccountModal').modal('hide');
 
-                            // ✅ Reset form
-                            $('#addUserForm')[0].reset();
+                                // ✅ Reset form
+                                $('#addUserForm')[0].reset();
 
-                            // ✅ Show success toast
-                            toastr.success('User account has been registered successfully!');
-                            location.reload();
+                                // ✅ Show success toast
+                                toastr.success('User account has been registered successfully!');
+                                location.reload();
 
-                        } else {
-                            toastr.error('Something went wrong. Please try again.');
+                            } else {
+                                toastr.error('Something went wrong. Please try again.');
+                            }
+                        },
+                        error: function(response) {
+                            if (response.status === 422) {
+                                let errors = response.responseJSON.errors;
+                                $.each(errors, function(field, error) {
+                                    $('span.' + field + '_error').text(error[0]);
+                                });
+                                toastr.error('Please fix the errors and try again.');
+                            } else {
+                                toastr.error('Unexpected error occurred.');
+                            }
                         }
-                    },
-                    error: function(response) {
-                        if (response.status === 422) {
-                            let errors = response.responseJSON.errors;
-                            $.each(errors, function(field, error) {
-                                $('span.' + field + '_error').text(error[0]);
-                            });
-                            toastr.error('Please fix the errors and try again.');
-                        } else {
-                            toastr.error('Unexpected error occurred.');
-                        }
-                    }
+                    });
                 });
             });
-        });
-    </script>
+        </script>
 
-    <script>
-        $(document).ready(function() {
-            $('#usersTable').DataTable({
-                paging: true,
-                searching: true,
-                ordering: true,
-                columnDefs: [{
-                    orderable: false,
-                    targets: 5
-                }]
+        <script>
+            $(document).ready(function() {
+                $('#usersTable').DataTable({
+                    paging: true,
+                    searching: true,
+                    ordering: true,
+                    columnDefs: [{
+                        orderable: false,
+                        targets: 5
+                    }]
+                });
             });
-        });
     </script>
 
     <!-- Include DataTables CSS and JS -->

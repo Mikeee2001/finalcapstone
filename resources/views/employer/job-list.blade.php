@@ -42,7 +42,7 @@
                                         <th>salary_min</th>
                                         <th>salary_max</th>
                                         <th>job_type</th>
-                                        
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
