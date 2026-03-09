@@ -9,7 +9,7 @@ class Jobseeker extends Model
 {
     use HasFactory;
 
-    protected $table = 'jobseeker';
+    protected $table = 'jobseekers';
 
     protected $fillable = [
         'address',
@@ -23,6 +23,12 @@ class Jobseeker extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function skills()
+    {
+        return $this->belongsToMany(Skills::class, 'jobseeker_skills', 'jobseeker_id', 'skill_id')
+                    ->withTimestamps();
     }
 
 }

@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-
     <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     <link rel="stylesheet" href="css1/responsive-style.css">
 </head>
@@ -67,10 +66,18 @@
 
     <!-- Hero Section -->
     <section class="hero-section d-flex align-items-center text-center text-white"
-        style="height:100vh; background:url('{{ asset('images/office-bg.jpg') }}') center/cover;">
+        style="height:100vh; position:relative; overflow:hidden;">
+
+        <!-- Background Logo -->
+        <div class="hero-logo-bg position-absolute w-100 h-100"></div>
+
+        <!-- Gradient Overlay -->
         <div class="hero-overlay position-absolute w-100 h-100"
-            style="background:linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,123,255,0.6));"></div>
-        <div class="container position-relative">
+            style="background: linear-gradient(135deg, rgba(0,33,71,0.7), rgba(220,53,69,0.5)); z-index:1;">
+        </div>
+
+        <!-- Content -->
+        <div class="container position-relative" style="z-index:2;">
             <h1 class="display-4 fw-bold">Smart Employment Matching</h1>
             <p class="lead">Connecting jobseekers with trusted employers</p>
             <div class="mt-4">
@@ -80,27 +87,27 @@
         </div>
     </section>
 
+
     <!-- Jobs Section -->
     <section id="jobs" class="py-5">
         <div class="container">
             <h2 class="text-center mb-4">Featured Jobs</h2>
             <div class="row">
                 {{-- @foreach ($jobs as $job) --}}
-                    <div class="col-md-4 mb-4">
-                        <div class="card h-100 shadow-sm">
-                            <div class="card-body text-center">
-                                <img src="#"
-                                    class="img-fluid mb-3" style="max-height:60px;">
-                                <h5 class="card-title">Job Title</h5>
-                                <p class="text-muted">Company Name</p>
-                                <p><strong>Salary:</strong> $job->salary_min  - salary_max</p>
-                                <span class="badge bg-info">job_type</span>
-                            </div>
-                            <div class="card-footer text-center">
-                                <a href="#" class="btn btn-primary">Apply Now</a>
-                            </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <img src="#" class="img-fluid mb-3" style="max-height:60px;">
+                            <h5 class="card-title">Job Title</h5>
+                            <p class="text-muted">Company Name</p>
+                            <p><strong>Salary:</strong> $job->salary_min - salary_max</p>
+                            <span class="badge bg-info">job_type</span>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a href="#" class="btn btn-primary">Apply Now</a>
                         </div>
                     </div>
+                </div>
                 {{-- @endforeach --}}
             </div>
             <div class="text-center mt-4">
@@ -115,16 +122,15 @@
             <h2 class="text-center mb-4">Featured Employers</h2>
             <div class="row">
                 {{-- @foreach ($companies as $company) --}}
-                    <div class="col-md-3 mb-4">
-                        <div class="card h-100 text-center shadow-sm">
-                            <div class="card-body">
-                                <img src="#"
-                                    class="img-fluid mb-3" style="max-height:60px;">
-                                <h5 class="card-title">Company Name</h5>
-                                <p class="text-muted">Company Address</p>
-                            </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100 text-center shadow-sm">
+                        <div class="card-body">
+                            <img src="#" class="img-fluid mb-3" style="max-height:60px;">
+                            <h5 class="card-title">Company Name</h5>
+                            <p class="text-muted">Company Address</p>
                         </div>
                     </div>
+                </div>
                 {{-- @endforeach --}}
             </div>
         </div>
@@ -136,22 +142,22 @@
             <h2 class="text-center mb-4">Upcoming Events</h2>
             <div class="row">
                 {{-- @foreach ($events as $event) --}}
-                    <div class="col-md-4 mb-4">
-                        <div class="card h-100 shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title">Event Title</h5>
-                                <p class="text-muted">Event Location</p>
-                                <p><strong>Date:</strong> Event Date</p>
-                                    {{-- @if (now()->between($event->start_time, $event->end_time))
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Event Title</h5>
+                            <p class="text-muted">Event Location</p>
+                            <p><strong>Date:</strong> Event Date</p>
+                            {{-- @if (now()->between($event->start_time, $event->end_time))
                                         <span class="badge bg-success">Ongoing</span>
                                     @elseif(now()->lt($event->start_time))
                                         <span class="badge bg-info">Upcoming</span>
                                     @else
                                         <span class="badge bg-secondary">Finished</span>
                                     @endif --}}
-                            </div>
                         </div>
                     </div>
+                </div>
                 {{-- @endforeach --}}
             </div>
         </div>

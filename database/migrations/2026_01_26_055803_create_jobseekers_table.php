@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('jobseeker', function (Blueprint $table) {
+        Schema::create('jobseekers', function (Blueprint $table) {
             $table->id();
 
             $table->string('address');

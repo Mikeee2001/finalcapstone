@@ -22,13 +22,12 @@ class PostJobController extends Controller
             'salary_min' => 'nullable|numeric',
             'salary_max' => 'nullable|numeric',
             'job_type' => 'required|string|max:50',
-            'status' => 'required|in:active,inactive',
             'skills' => 'required|array',
             'skills.*' => 'exists:skills,id',
         ]);
 
-        $employer = auth()->user()->employer;   // User → Employer
-        $company = $employer->company;         // Employer → CompanyDetail
+        $employer = auth()->user()->employer;
+        $company = $employer->company;
 
         try {
             $jobPost = JobPosts::create([
@@ -38,19 +37,23 @@ class PostJobController extends Controller
                 'salary_min' => $validatedData['salary_min'] ?? null,
                 'salary_max' => $validatedData['salary_max'] ?? null,
                 'job_type' => $validatedData['job_type'],
-                'company_id' => $company->id,    // ✅ correct company link
+                'company_id' => $company->id,
+                'status' => 'active',
             ]);
 
-            // Attach skills to the job post
             $jobPost->skills()->sync($validatedData['skills']);
 
-            return redirect()->route('employer.job-list')
-                ->with('success', 'Job post created successfully!');
-        } catch (\Exception $e) {
-            return back()->withErrors([
-                'error' => 'Failed to create job post: ' . $e->getMessage()
+            return response()->json([
+                'success' => true,
+                'message' => 'Job post created successfully!',
+                'job' => $jobPost->load('skills')
             ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to create job post',
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
-
 }

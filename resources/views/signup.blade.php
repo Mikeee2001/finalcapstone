@@ -25,7 +25,8 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Full Name:</label>
-                            <input type="text" name="full_name" class="input-text" placeholder="Full Name" required>
+                            <input type="text" name="full_name" value="{{ old('full_name') }}" class="input-text"
+                                placeholder="Full Name" required>
                             @error('full_name')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -33,8 +34,8 @@
 
                         <div class="form-group">
                             <label class="form-label">Email:</label>
-                            <input type="email" name="email" class="input-text" placeholder="Email Address"
-                                required>
+                            <input type="email" name="email" value="{{ old('email') }}" class="input-text"
+                                placeholder="Email Address" required>
                             @error('email')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -45,15 +46,16 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Address:</label>
-                            <input type="text" name="address" class="input-text" placeholder="Address" required>
+                            <input type="text" name="address" value="{{ old('address') }}" class="input-text"
+                                placeholder="Address" required>
                             @error('address')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label class="form-label">Expected Salary:</label>
-                            <input type="number" name="expected_salary" class="input-text"
-                                placeholder="Expected Salary" required>
+                            <input type="number" name="expected_salary" value="{{ old('expected_salary') }}"
+                                class="input-text" placeholder="Expected Salary" required>
                             @error('expected_salary')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -64,17 +66,45 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Create Password:</label>
-                            <input type="password" name="password" class="input-text" placeholder="New Password"
-                                required>
+                            <input type="password" name="password" value="{{ old('password') }}" class="input-text"
+                                placeholder="New Password" required>
                             @error('password')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label class="form-label">Confirm Password:</label>
-                            <input type="password" name="password_confirmation" class="input-text"
+                            <input type="password" name="password_confirmation"
+                                value="{{ old('password_confirmation') }}" class="input-text"
                                 placeholder="Confirm Password" required>
                             @error('password_confirmation')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <!-- Job Type + Skills -->
+                    <div class="form-row">
+                        <!-- Job Type -->
+                        <div class="form-group">
+                            <label class="form-label">Job Type:</label>
+                            <select name="job_type" class="input-text" required>
+                                <option value="full-time" {{ old('job_type') == 'full-time' ? 'selected' : '' }}>
+                                    Full-time</option>
+                                <option value="part-time" {{ old('job_type') == 'part-time' ? 'selected' : '' }}>
+                                    Part-time</option>
+                            </select>
+                            @error('job_type')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <!-- Skills -->
+                        <div class="form-group">
+                            <label class="form-label">Skills:</label>
+                            <input type="text" name="skills" value="{{ old('skills') }}" class="input-text"
+                                placeholder="e.g. PHP, Laravel, Bootstrap" required>
+                            @error('skills')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
@@ -84,41 +114,27 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Application Letter:</label>
-                            <input type="file" name="application_letter" class="input-text"
-                                accept=".pdf,.doc,.docx,.txt" required>
+                            <input type="file" name="application_letter" value="{{ old('application_letter') }}"
+                                class="input-text" accept=".pdf,.doc,.docx,.txt" required>
                             @error('application_letter')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label class="form-label">Resume:</label>
-                            <input type="file" name="resume" class="input-text" accept=".pdf,.doc,.docx" required>
+                            <input type="file" name="resume" value="{{ old('resume') }}" class="input-text"
+                                accept=".pdf,.doc,.docx" required>
                             @error('resume')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
 
-                    <!-- Job Type -->
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">Job Type:</label>
-                            <select name="job_type" class="input-text" required>
-                                <option value="full-time">Full-time</option>
-                                <option value="part-time">Part-time</option>
-                            </select>
-                            @error('job_type')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    
-
                     <!-- Submit -->
                     <div class="form-row submit-row">
                         <input type="submit" value="Sign Up" class="login-btn btn-primary btn">
                     </div>
+                    
                 </form>
 
                 <div>
@@ -130,6 +146,22 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.querySelector('form[action="{{ route('login-form') }}"]');
+            const loginBtn = document.getElementById('loginBtn');
+            const btnText = document.getElementById('btnText');
+            const btnLoader = document.getElementById('btnLoader');
+
+            loginForm.addEventListener('submit', function() {
+                loginBtn.disabled = true; // prevent double clicks
+                btnText.classList.add('hidden'); // hide "Login" text
+                btnLoader.classList.remove('hidden'); // show animated loader
+            });
+        });
+    </script>
+
 </body>
 
 </html>

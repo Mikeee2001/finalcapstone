@@ -21,5 +21,10 @@ class JobPosts extends Model
         'date_posted',
         'company_id',
     ];
+
+    public function skills()
+    {
+        return $this->belongsToMany(Skills::class, 'job_post_skills', 'job_post_id', 'skill_id');
+    }
 }
-    
+

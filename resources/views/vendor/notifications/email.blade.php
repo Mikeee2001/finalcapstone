@@ -1,16 +1,11 @@
 <x-mail::message>
-{{-- Greeting --}}
-@if (! empty($greeting))
-# {{ $greeting }}
-@else
-@if ($level === 'error')
-# @lang('Whoops!')
-@else
-# @lang('Hello!')
-@endif
-@endif
 
-{{-- Intro Lines --}}
+{{-- Header --}}
+# Welcome to the Opol PESO Employment System
+
+We’re glad to have you join the **Opol PESO Employment System**, a platform designed to connect **job seekers and employers** with opportunities in the community.
+
+{{-- Intro Message --}}
 @foreach ($introLines as $line)
 {{ $line }}
 
@@ -18,35 +13,32 @@
 
 {{-- Action Button --}}
 @isset($actionText)
-<?php
-    $color = match ($level) {
-        'success', 'error' => $level,
-        default => 'primary',
-    };
-?>
-<x-mail::button :url="$actionUrl" :color="$color">
+<x-mail::button :url="$actionUrl" color="primary">
 {{ $actionText }}
 </x-mail::button>
 @endisset
 
-{{-- Outro Lines --}}
+{{-- Additional Info --}}
 @foreach ($outroLines as $line)
 {{ $line }}
 
 @endforeach
 
-{{-- Salutation --}}
-@if (! empty($salutation))
-{{ $salutation }}
-@else
-@lang('Regards'),<br>
-{{ config('app.name') }}
-@endif
-
-{{-- Custom Message --}}
+{{-- Success Message --}}
 @if ($level === 'success')
-# Your account is verified!
+
+## ✅ Your account has been successfully verified!
+
+You may now log in to the **Opol Employment System** and start exploring job opportunities or managing your job postings.
 @endif
 
-{{-- Remove the Subcopy --}}
+{{-- Closing --}}
+Thanks,<br>
+**Opol PESO Employment System Team**
+
+<small>
+This email was sent automatically by the Opol Employment System.
+Please do not reply directly to this message.
+</small>
+
 </x-mail::message>

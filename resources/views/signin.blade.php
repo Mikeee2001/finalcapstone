@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/animations.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/signin.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/loader.css') }}">
 
 </head>
 
@@ -48,10 +49,11 @@
                 <div>
                     <button type="submit" class="login-btn" id="loginBtn">
                         <span id="btnText">Login</span>
-                        <span id="btnSpinner" class="spinner-border spinner-border-sm d-none" role="status"
-                            aria-hidden="true"></span>
+                        <!-- Loader hidden by default -->
+                        <span id="btnLoader" class="loader hidden"></span>
                     </button>
                 </div>
+
             </form>
 
             <div>
@@ -122,20 +124,19 @@
 
     {{-- Loading spinner js --}}
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const form = document.querySelector("form");
-            const loginBtn = document.getElementById("loginBtn");
-            const btnText = document.getElementById("btnText");
-            const btnSpinner = document.getElementById("btnSpinner");
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.querySelector('form[action="{{ route('login-form') }}"]');
+            const loginBtn = document.getElementById('loginBtn');
+            const btnText = document.getElementById('btnText');
+            const btnLoader = document.getElementById('btnLoader');
 
-            form.addEventListener("submit", function() {
-                loginBtn.disabled = true;
-                btnSpinner.classList.remove("d-none");
-                btnText.textContent = "Logging in...";
+            loginForm.addEventListener('submit', function() {
+                loginBtn.disabled = true; // prevent double clicks
+                btnText.classList.add('hidden'); // hide "Login" text
+                btnLoader.classList.remove('hidden'); // show animated loader
             });
         });
     </script>
-
 
 </body>
 

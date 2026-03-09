@@ -255,10 +255,14 @@ p {
 }
 
 .logo {
-    max-height: 45px;        /* keeps it visible but not oversized */
-    width: auto;             /* maintain aspect ratio */
-    background-color: #fff;  /* ✅ white background so text inside logo is readable */
-    padding: 4px;            /* spacing around logo */
+    max-height: 45px;
+    /* keeps it visible but not oversized */
+    width: auto;
+    /* maintain aspect ratio */
+    background-color: #fff;
+    /* ✅ white background so text inside logo is readable */
+    padding: 4px;
+    /* spacing around logo */
 }
 
 
@@ -583,4 +587,36 @@ p {
         margin-bottom: 0.9375rem;
     }
 
+}
+
+.hero-logo-bg {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 120%;
+    background-image: url('/images/oip.png');
+    opacity: 0.15;
+}
+
+/* Desktop screens */
+@media (min-width: 992px) {
+    .hero-logo-bg {
+        background-size: 50%;
+        /* logo takes half the width */
+    }
+}
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 991px) {
+    .hero-logo-bg {
+        background-size: 70%;
+        /* slightly larger */
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 767px) {
+    .hero-logo-bg {
+        background-size: 90%;
+        /* almost full width */
+    }
 }

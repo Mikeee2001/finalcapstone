@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Employer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Employers;
+use App\Models\JobPosts;
+use App\Models\Skills;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class IndexController extends Controller
@@ -29,7 +32,10 @@ class IndexController extends Controller
 
     public function getJobList()
     {
-        return view('employer.job-list');
+        $jobs = JobPosts::with('skills')->get();
+        $skills = Skills::all();
+
+        return view('employer.job-list', compact('jobs','skills'));
     }
 
     public function getEmployerSignupForm()

@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\IndexController as AdminIndexController;
+use App\Http\Controllers\Controller;
 
 use App\Http\Controllers\Employer\IndexController as EmployerIndexController;
+use App\Http\Controllers\Employer\PostJobController;
+
 use App\Http\Controllers\Jobseeker\IndexController as JobseekerIndexController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SignupController;
-// use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -105,6 +106,8 @@ Route::get('/jobseeker/dashboard', [JobseekerIndexController::class, 'index'])->
 Route::prefix('employer')->middleware(['auth', 'verified', 'checkRole:employer'])->group(function () {
 Route::get('/dashboard', [EmployerIndexController::class, 'index'])->name('employer.dashboard');
 Route::get('/job-list', [EmployerIndexController::class, 'getJobList'])->name('employer.job-list');
+
+Route::post('/post-job', [PostJobController::class, 'addJobPost'])->name('employer.post-job');
 
 });
 

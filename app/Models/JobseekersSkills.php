@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Jobseeker;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,14 +17,13 @@ class JobseekersSkills extends Model
         'skill_id',
     ];
 
-    public function jobseeker()
+    public function jobseekers()
     {
-        return $this->belongsTo(Jobseeker::class, 'jobseeker_id');
+        return $this->belongsTo(Jobseeker::class);
     }
 
-    public function skill()
+    public function skills()
     {
-        return $this->belongsTo(Skills::class, 'skill_id');
+        return $this->belongsTo(Skills::class);
     }
-
 }

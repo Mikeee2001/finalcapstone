@@ -83,4 +83,5 @@ class EmployerVerifyEmail extends Notification
             'hash' => sha1($notifiable->getEmailForVerification()),
         ], false));
     }
+
 }

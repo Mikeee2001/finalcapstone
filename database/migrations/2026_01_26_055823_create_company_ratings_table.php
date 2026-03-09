@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->timestamps();
 
             $table->foreignId('company_id')->constrained('company_details')->onDelete('cascade');
-            $table->foreignId('jobseeker_id')->constrained('jobseeker')->onDelete('cascade');
+            $table->foreignId('jobseeker_id')->constrained('jobseekers')->onDelete('cascade');
         });
     }
 

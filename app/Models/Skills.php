@@ -19,7 +19,7 @@ class Skills extends Model
 
     public function jobseekersSkills()
     {
-        return $this->hasMany(JobseekersSkills::class, 'skill_id');
+        return $this->belongsToMany(JobseekersSkills::class, 'skill_id', 'jobseeker_id', 'jobseeker_skills' )->withTimestamps();
     }
 
     public function jobpostingsSkills()
