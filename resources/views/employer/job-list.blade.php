@@ -37,6 +37,9 @@
                             </button>
                         </div>
                         <div class="card-body">
+
+                            <div id="tableLoader" class="custom-loader"></div>
+
                             <table id="jobsTable" class="table table-bordered table-striped">
                                 <thead>
                                     <tr class="text-center">
@@ -53,11 +56,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- @foreach ($jobs as $job)
+                                    @foreach ($jobs as $index => $job)
                                         <tr class="text-center">
-                                            <th></th>
+                                            <td>{{ $index + 1 }}</td>
+                                            <td>{{ $job->title }}</td>
+                                            <td>{{ $job->description }}</td>
+                                            <td>{{ $job->location }}</td>
+                                            <td>{{ $job->salary_min }} - {{ $job->salary_max }}</td>
+                                            <td>{{ ucfirst($job->job_type) }}</td>
+                                            <td>{{ $job->skill ? $job->skill->skill_name : 'N/A' }}</td>
+                                            <td>{{ $job->created_at->format('Y-m-d') }}</td>
+                                            <td>{{ ucfirst($job->status) }}</td>
                                         </tr>
-                                    @endforeach --}}
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -67,10 +78,9 @@
         </div>
 
         <!-- Modal for Adding New Job -->
-        <!-- Modal for Adding New Job -->
         <div class="modal fade" id="addJobModal" tabindex="-1" role="dialog" aria-labelledby="addJobModalLabel"
             aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document"> <!-- modal-lg for wider layout -->
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
 
                     <!-- Header -->
@@ -80,7 +90,8 @@
                     </div>
 
                     <!-- Form -->
-                    <form id="addJobForm" class="form-horizontal">
+                    <form id="addJobForm" method="POST" action="{{ route('employer.post-job') }}"
+                        class="form-horizontal">
                         @csrf
                         <div class="modal-body">
 
@@ -88,7 +99,8 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Job Title</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="title" class="form-control" required>
+                                    <input type="text" name="title" class="form-control"
+                                        placeholder="Enter job title" required>
                                     <span class="text-danger error-text title_error"></span>
                                 </div>
                             </div>
@@ -97,33 +109,8 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Job Description</label>
                                 <div class="col-sm-9">
-                                    <textarea name="description" class="form-control" required></textarea>
+                                    <textarea name="description" class="form-control" placeholder="Enter job description"></textarea>
                                     <span class="text-danger error-text description_error"></span>
-                                </div>
-                            </div>
-
-                            <!-- Location -->
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Location</label>
-                                <div class="col-sm-9">
-                                    <input type="text" name="location" class="form-control" required>
-                                    <span class="text-danger error-text location_error"></span>
-                                </div>
-                            </div>
-
-                            <!-- Salary Range -->
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Minimum Salary</label>
-                                <div class="col-sm-9">
-                                    <input type="number" name="salary_min" class="form-control">
-                                    <span class="text-danger error-text salary_min_error"></span>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Maximum Salary</label>
-                                <div class="col-sm-9">
-                                    <input type="number" name="salary_max" class="form-control">
-                                    <span class="text-danger error-text salary_max_error"></span>
                                 </div>
                             </div>
 
@@ -132,25 +119,48 @@
                                 <label class="col-sm-3 col-form-label">Job Type</label>
                                 <div class="col-sm-9">
                                     <select name="job_type" class="form-control" required>
-                                        <option value="full-time">Full‑Time</option>
-                                        <option value="part-time">Part‑Time</option>
+                                        <option value="">Select Job Type</option>
+                                        <option value="full-time">Full-time</option>
+                                        <option value="part-time">Part-time</option>
                                     </select>
                                     <span class="text-danger error-text job_type_error"></span>
                                 </div>
                             </div>
 
-                            <!-- Skills -->
+                            <!-- Location -->
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Required Skills</label>
+                                <label class="col-sm-3 col-form-label">Location</label>
                                 <div class="col-sm-9">
-                                    <select name="skills[]" class="form-control" multiple required>
-                                        @foreach ($skills as $skill)
-                                            <option value="{{ $skill->id }}">{{ $skill->skill_name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <small class="form-text text-muted">Add one or more skills required for this
-                                        job.</small>
-                                    <span class="text-danger error-text skills_error"></span>
+                                    <input type="text" name="location"required class="form-control"
+                                        placeholder="Enter location" required>
+                                    <span class="text-danger error-text location_error"></span>
+                                </div>
+                            </div>
+
+                            <!-- Salary Range -->
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Minimum Salary</label>
+                                <div class="col-sm-9">
+                                    <input type="number" name="salary_min" class="form-control"
+                                        placeholder="Enter minimum salary" required>
+                                    <span class="text-danger error-text salary_min_error"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Maximum Salary</label>
+                                <div class="col-sm-9">
+                                    <input type="number" name="salary_max" class="form-control"
+                                        placeholder="Enter maximum salary" required>
+                                    <span class="text-danger error-text salary_max_error"></span>
+                                </div>
+                            </div>
+
+                            <!-- Required Skill -->
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Required Skill</label>
+                                <div class="col-sm-9">
+                                    <select name="skill_id" id="skill" class="form-control"></select>
+                                    <span class="text-danger error-text skill_error"></span>
                                 </div>
                             </div>
 
@@ -166,66 +176,21 @@
             </div>
         </div>
 
+
         <!-------------------------------------- Main content ---------------------------------------->
 
         @include('layout.footer')
 
-        <!-- AJAX for Adding New Job Post -->
-        <script>
-            $(document).ready(function() {
-                $('#addUserForm').on('submit', function(e) {
-                    e.preventDefault();
-
-                    let formData = new FormData(this);
-
-                    // Clear previous errors
-                    $('span.error-text').text('');
-
-                    $.ajax({
-                        url: "{{ route('add-user') }}",
-                        method: 'POST',
-                        data: formData,
-                        contentType: false,
-                        processData: false,
-                        success: function(response) {
-                            if (response.success === true) {
-                                // ✅ Close modal
-                                $('#addAccountModal').modal('hide');
-
-                                // ✅ Reset form
-                                $('#addUserForm')[0].reset();
-
-                                // ✅ Show success toast
-                                toastr.success('User account has been registered successfully!');
-                                location.reload();
-
-                            } else {
-                                toastr.error('Something went wrong. Please try again.');
-                            }
-                        },
-                        error: function(response) {
-                            if (response.status === 422) {
-                                let errors = response.responseJSON.errors;
-                                $.each(errors, function(field, error) {
-                                    $('span.' + field + '_error').text(error[0]);
-                                });
-                                toastr.error('Please fix the errors and try again.');
-                            } else {
-                                toastr.error('Unexpected error occurred.');
-                            }
-                        }
-                    });
-                });
-            });
-        </script>
-
-        <!-- CSS -->
+        <!-- DataTables CSS -->
         <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
         <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('dist/css/select2.min.css') }}">
+
+        <!-- Select2 CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
         <!-- jQuery -->
         <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+        <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
         <!-- DataTables JS -->
         <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
@@ -234,10 +199,11 @@
         <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
 
         <!-- Select2 JS -->
-        <script src="{{ asset('dist/js/select2.min.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-        <!-- Toastr JS -->
+        <!-- Toastr -->
         <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
+
 
         <!-- Your custom scripts (initialization) -->
         <script>
@@ -253,19 +219,6 @@
                         targets: [6, 7, 8]
                     }]
                 });
-
-                // Select2 init
-                $('#skills').select2({
-                    placeholder: "Select required skills",
-                    allowClear: true,
-                    width: '100%'
-                });
-
-                // Toastr example
-                toastr.options = {
-                    closeButton: true,
-                    progressBar: true
-                };
             });
         </script>
 
@@ -292,6 +245,73 @@
             };
         </script>
 
+        <script>
+            $(document).ready(function() {
+
+                // Initialize Select2 when modal opens
+                $('#addJobModal').on('shown.bs.modal', function() {
+                    $('#skill').select2({
+                        dropdownParent: $('#addJobModal'),
+                        placeholder: "Select or enter skill",
+                        width: '100%',
+                        minimumInputLength: 1,
+                        ajax: {
+                            url: "{{ route('employer.skills-search') }}",
+                            dataType: 'json',
+                            delay: 250,
+                            data: function(params) {
+                                return {
+                                    q: params.term
+                                };
+                            },
+                            processResults: function(data) {
+                                return {
+                                    results: data.results
+                                };
+                            }
+                        }
+                    });
+                });
+
+                // AJAX form submit
+                $('#addJobForm').on('submit', function(e) {
+                    e.preventDefault();
+
+                    let formData = new FormData(this);
+                    $('span.error-text').text('');
+
+                    $.ajax({
+                        url: "{{ route('employer.post-job') }}",
+                        method: 'POST',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function(response) {
+                            if (response.success) {
+                                $('#addJobModal').modal('hide');
+                                $('#addJobForm')[0].reset();
+                                toastr.success('Job post created successfully!');
+                                location.reload();
+                            } else {
+                                toastr.error(response.error || 'Something went wrong.');
+                            }
+                        },
+                        error: function(response) {
+                            if (response.status === 422) {
+                                let errors = response.responseJSON.errors;
+                                $.each(errors, function(field, error) {
+                                    $('span.' + field + '_error').text(error[0]);
+                                });
+                                toastr.error('Please fix the errors and try again.');
+                            } else {
+                                toastr.error('Unexpected error occurred.');
+                            }
+                        }
+                    });
+                });
+
+            });
+        </script>
 
     </div>
 

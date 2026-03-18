@@ -36,8 +36,7 @@ class SignupController extends Controller
         $user = User::create([
             'full_name' => $request->input('full_name'),
             'email' => $request->input('email'),
-            'address' => $request->input('address'),
-            'role_as' => 'jobseeker',
+            'role_as' => 'jobseeker',   
             'password' => Hash::make($request->input('password')),
             'status' => 'inactive',
         ]);

@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\IndexController as AdminIndexController;
 use App\Http\Controllers\Controller;
 
 use App\Http\Controllers\Employer\IndexController as EmployerIndexController;
-use App\Http\Controllers\Employer\PostJobController;
+use App\Http\Controllers\Employer\JobController;
 
 use App\Http\Controllers\Jobseeker\IndexController as JobseekerIndexController;
 use App\Http\Controllers\LoginController;
@@ -105,11 +105,13 @@ Route::get('/jobseeker/dashboard', [JobseekerIndexController::class, 'index'])->
 // Employer Routes
 Route::prefix('employer')->middleware(['auth', 'verified', 'checkRole:employer'])->group(function () {
 Route::get('/dashboard', [EmployerIndexController::class, 'index'])->name('employer.dashboard');
-Route::get('/job-list', [EmployerIndexController::class, 'getJobList'])->name('employer.job-list');
+Route::get('/job-list', [JobController::class, 'getJobList'])->name('employer.job-list');
 
-Route::post('/post-job', [PostJobController::class, 'addJobPost'])->name('employer.post-job');
+Route::post('/jobs/add', [JobController::class, 'addJobPost'])->name('employer.post-job');
+Route::get('/skills/search', [JobController::class, 'search'])->name('employer.skills-search');
 
 });
+// END employer routes
 
 
 // Logout Routes

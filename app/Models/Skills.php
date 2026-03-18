@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use App\Models\JobseekersSkills;
-use App\Models\JobSkills;
+use App\Models\JobPosts;
+use App\Models\Jobseeker;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,17 +14,16 @@ class Skills extends Model
 
     protected $table = 'skills';
 
-    protected $fillable = [
-        'skill_name',
-    ];
+    protected $fillable = ['skill_name'];
 
-    public function jobseekersSkills()
+    public function jobposts()
     {
-        return $this->belongsToMany(JobseekersSkills::class, 'skill_id', 'jobseeker_id', 'jobseeker_skills' )->withTimestamps();
+        return $this->hasMany(JobPosts::class, 'skill_id');
     }
 
-    public function jobpostingsSkills()
+    public function jobseekers()
     {
-        return $this->hasMany(JobSkills::class, 'skill_id');
+        return $this->belongsToMany(Jobseeker::class, 'jobseeker_skills', 'skill_id', 'jobseeker_id');
     }
 }
+

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\CompanyDetails;
+use App\Models\Skills;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,13 +20,19 @@ class JobPosts extends Model
         'salary_min',
         'salary_max',
         'job_type',
-        'date_posted',
         'company_id',
+        'status',
+        'skill_id',
     ];
-
-    public function skills()
+    public function skill()
     {
-        return $this->belongsToMany(Skills::class, 'job_post_skills', 'job_post_id', 'skill_id');
+        return $this->belongsTo(Skills::class,'skill_id');
     }
+
+    public function companyDetails()
+    {
+        return $this->belongsTo(CompanyDetails::class, 'company_id');
+    }
+
 }
 

@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use App\Models\Employers;
 use App\Models\CompanyRatings;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Employers;
+use App\Models\JobPosts;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class CompanyDetails extends Model
 {
@@ -29,5 +30,10 @@ class CompanyDetails extends Model
     public function companyRatings()
     {
         return $this->hasMany(CompanyRatings::class, 'company_id');
+    }
+
+    public function jobPosts()
+    {
+        return $this->hasMany(JobPosts::class, 'company_id');
     }
 }

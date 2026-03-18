@@ -194,11 +194,6 @@
     <!-- Footer -->
     <footer class="bg-dark text-white text-center py-3">
         <p>&copy; {{ date('Y') }} PESO Employment System. All rights reserved.</p>
-        <div>
-            <a href="#" class="text-white me-3">About</a>
-            <a href="#" class="text-white me-3">Contact</a>
-            <a href="#" class="text-white">Privacy Policy</a>
-        </div>
     </footer>
 
     </div>

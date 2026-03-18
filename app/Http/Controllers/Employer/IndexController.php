@@ -4,13 +4,10 @@ namespace App\Http\Controllers\Employer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Employers;
-use App\Models\JobPosts;
-use App\Models\Skills;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class IndexController extends Controller
@@ -25,17 +22,9 @@ class IndexController extends Controller
         return view('employer.employer-page');
     }
 
-     public function employerLandingPage()
+    public function employerLandingPage()
     {
         return view('employer.employer-page');
-    }
-
-    public function getJobList()
-    {
-        $jobs = JobPosts::with('skills')->get();
-        $skills = Skills::all();
-
-        return view('employer.job-list', compact('jobs','skills'));
     }
 
     public function getEmployerSignupForm()
@@ -44,45 +33,41 @@ class IndexController extends Controller
     }
     public function employerSignup(Request $request)
     {
-        // Validate the incoming request data
         $validatedData = $request->validate([
             'full_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'address' => 'required|string|max:255',
             'company_name' => 'required|string|max:255',
             'company_address' => 'required|string|max:255',
             'company_description' => 'required|string|max:255',
+            'company_logo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         try {
-            // Create the user record
             $user = User::create([
                 'full_name' => $validatedData['full_name'],
                 'email' => $validatedData['email'],
-                'address' => $validatedData['address'],
                 'password' => Hash::make($validatedData['password']),
-                'role_as' => 'employer', // make sure this matches your DB column
+                'role_as' => 'employer',
             ]);
 
-            // Create employer record linked to user
             $employer = Employers::create([
                 'user_id' => $user->id,
             ]);
 
-            // Create company details linked to employer
+            // ✅ Safe logo storage
+            $logoPath = $request->hasFile('company_logo')
+                ? $request->file('company_logo')->store('company_logos', 'public')
+                : null;
+
             $employer->companyDetails()->create([
                 'company_name' => $validatedData['company_name'],
                 'company_address' => $validatedData['company_address'],
                 'company_description' => $validatedData['company_description'],
+                'company_logo' => $logoPath,
             ]);
 
-            \DB::enableQueryLog();
-
-            // Fire Laravel's Registered event (triggers email verification)
             event(new Registered($user));
-
-            // Auto-login after signup
             Auth::login($user);
 
             return redirect()->route('signin')
@@ -92,7 +77,6 @@ class IndexController extends Controller
                 ->with('error', 'Failed to create user. ' . $e->getMessage());
         }
     }
-
 
     public function logout(Request $request)
     {

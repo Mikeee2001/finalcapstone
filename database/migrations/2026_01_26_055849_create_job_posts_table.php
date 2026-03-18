@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -14,15 +13,16 @@ return new class extends Migration
         Schema::create('job_posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('location');
-            $table->decimal('salary_min', 10, 2);
-            $table->decimal('salary_max', 10, 2);
+            $table->integer('salary_min');
+            $table->integer('salary_max');
             $table->enum('job_type', ['full-time', 'part-time']);
-            $table->timestamp('date_posted');
-            $table->enum('status', ['active', 'inactive']);
+            $table->timestamps();
+            $table->enum('status', ['active', 'inactive'])->default('inactive');
 
             $table->foreignId('company_id')->constrained('company_details')->onDelete('cascade');
+            $table->foreignId('skill_id')->constrained('skills')->onDelete('cascade');
         });
     }
 
