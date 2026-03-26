@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
 {
-           public function index()
+    public function dasboard()
     {
         return view('jobseeker.dashboard');
     }
-     public function logout(Request $request)
+    public function logout(Request $request)
     {
         // Get the current user
         $user = Auth::user();

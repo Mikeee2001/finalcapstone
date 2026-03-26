@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [Controller::class, 'index'])->name('welcome');
+// Route::get('/jobs',[JobController::class, 'list'])->name('jobs.list');
 
 // Login and Signup Routes
 Route::get('/signup', [SignupController::class, 'index'])->name('signup');
@@ -99,16 +100,18 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'checkRole:admin'])->gro
 
 
 // Jobseeker Routes
-Route::get('/jobseeker/dashboard', [JobseekerIndexController::class, 'index'])->middleware(['auth', 'verified'])->name('jobseeker.dashboard');
+Route::get('/jobseeker/dashboard', [JobseekerIndexController::class, 'dasboard'])->middleware(['auth', 'verified'])->name('jobseeker.dashboard');
 // Jobseeker Routes//
 
 // Employer Routes
 Route::prefix('employer')->middleware(['auth', 'verified', 'checkRole:employer'])->group(function () {
-Route::get('/dashboard', [EmployerIndexController::class, 'index'])->name('employer.dashboard');
-Route::get('/job-list', [JobController::class, 'getJobList'])->name('employer.job-list');
+    Route::get('/dashboard', [EmployerIndexController::class, 'index'])->name('employer.dashboard');
+    Route::get('/job-list', [JobController::class, 'getJobList'])->name('employer.job-list');
 
-Route::post('/jobs/add', [JobController::class, 'addJobPost'])->name('employer.post-job');
-Route::get('/skills/search', [JobController::class, 'search'])->name('employer.skills-search');
+    Route::post('/jobs/add', [JobController::class, 'addJob'])->name('employer.post-job');
+    Route::get('/skills/search', [JobController::class, 'search'])->name('employer.skills-search');
+    Route::post('/jobs/{id}/toggle-status', [JobController::class, 'toggleStatus'])->name('employer.toggle-job-status');
+
 
 });
 // END employer routes

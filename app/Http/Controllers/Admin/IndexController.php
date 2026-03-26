@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Validator;
 
 class IndexController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $totalUsers = User::where('status', 'active')->count();
         $totalJobs = JobPosts::count();

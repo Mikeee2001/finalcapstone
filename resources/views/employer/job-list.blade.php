@@ -66,7 +66,19 @@
                                             <td>{{ ucfirst($job->job_type) }}</td>
                                             <td>{{ $job->skill ? $job->skill->skill_name : 'N/A' }}</td>
                                             <td>{{ $job->created_at->format('Y-m-d') }}</td>
-                                            <td>{{ ucfirst($job->status) }}</td>
+                                            <td>
+                                                <span
+                                                    class="badge {{ $job->status === 'active' ? 'bg-success' : 'bg-danger' }}">
+                                                    {{ ucfirst($job->status) }}
+                                                </span>
+
+                                                <button
+                                                    class="btn btn-sm {{ $job->status === 'active' ? 'btn-outline-danger' : 'btn-outline-success' }} status-btn ms-2"
+                                                    data-url="{{ route('employer.toggle-job-status', $job->id) }}">
+                                                    {{ $job->status === 'active' ? 'Deactivate' : 'Activate' }}
+                                                </button>
+                                            </td>
+
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -203,7 +215,7 @@
 
         <!-- Toastr -->
         <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <!-- Your custom scripts (initialization) -->
         <script>
@@ -310,6 +322,60 @@
                     });
                 });
 
+            });
+        </script>
+
+        <script>
+            document.querySelectorAll('.status-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    let url = this.dataset.url; // Laravel-generated URL
+                    let badge = this.previousElementSibling;
+                    let button = this;
+
+                    fetch(url, {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.status === 'active') {
+                                button.innerHTML = 'Deactivate';
+                                button.className = 'btn btn-sm btn-outline-danger status-btn ms-2';
+                                badge.className = 'badge bg-success';
+                                badge.innerHTML = 'Active';
+                            } else {
+                                button.innerHTML = 'Activate';
+                                button.className = 'btn btn-sm btn-outline-success status-btn ms-2';
+                                badge.className = 'badge bg-danger';
+                                badge.innerHTML = 'Inactive';
+                            }
+
+                            // ✅ Toast notification
+                            Swal.fire({
+                                toast: true,
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Job status updated!',
+                                showConfirmButton: false,
+                                timer: 2000,
+                                timerProgressBar: true
+                            });
+                        })
+                        .catch(() => {
+                            Swal.fire({
+                                toast: true,
+                                position: 'top-end',
+                                icon: 'error',
+                                title: 'Something went wrong!',
+                                showConfirmButton: false,
+                                timer: 2000,
+                                timerProgressBar: true
+                            });
+                        });
+                });
             });
         </script>
 

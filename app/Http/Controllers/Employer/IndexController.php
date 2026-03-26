@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 class IndexController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         return view('employer.dashboard');
     }

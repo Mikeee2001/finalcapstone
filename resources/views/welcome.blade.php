@@ -9,60 +9,13 @@
 
     <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     <link rel="stylesheet" href="css1/responsive-style.css">
+
 </head>
 
-<!-- Updated Header Section -->
-<header class="header_wrapper">
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img decoding="async" src="">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fas fa-bars navbar-toggler-icon"></i>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item d-flex align-items-center">
-                        <!-- Logo -->
-                        <img src="{{ asset('images/oip.png') }}" alt="Logo" class="logo me-2">
-
-                        <!-- Text -->
-                        <a class="nav-link active margin-left text-bold" aria-current="page"
-                            href="{{ route('welcome') }}">
-                            Employment System
-                        </a>
-                    </li>
-
-                </ul>
-                <ul class="navbar-nav menu-navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#home">Jobs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">Company</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#events">Events</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
-                    </li>
-
-                    <li class="nav-item ms-lg-3">
-                        <a class="nav-link fill-btn main-btn" href="{{ route('signin') }}">Sign in</a>
-                    </li>
-                    <li class="nav-item ms-lg-2">
-                        <a class="signup nav-link main-btn" href="{{ route('employer') }}">Employer Site</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
 
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">
+
+    @include('header')
 
     <!-- Hero Section -->
     <section class="hero-section d-flex align-items-center text-center text-white"
@@ -87,81 +40,82 @@
         </div>
     </section>
 
-
-    <!-- Jobs Section -->
-    <section id="jobs" class="py-5">
+    <!-- Featured Jobs Section -->
+    <section id="featured-jobs" class="py-4 bg-light">
         <div class="container">
-            <h2 class="text-center mb-4">Featured Jobs</h2>
-            <div class="row">
-                {{-- @foreach ($jobs as $job) --}}
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body text-center">
-                            <img src="#" class="img-fluid mb-3" style="max-height:60px;">
-                            <h5 class="card-title">Job Title</h5>
-                            <p class="text-muted">Company Name</p>
-                            <p><strong>Salary:</strong> $job->salary_min - salary_max</p>
-                            <span class="badge bg-info">job_type</span>
-                        </div>
-                        <div class="card-footer text-center">
-                            <a href="#" class="btn btn-primary">Apply Now</a>
-                        </div>
-                    </div>
-                </div>
-                {{-- @endforeach --}}
-            </div>
-            <div class="text-center mt-4">
-                <a href="#" class="btn btn-outline-primary btn-lg">View All Jobs</a>
-            </div>
-        </div>
-    </section>
+            <h2 class="text-center fw-bold text-primary mb-3">🌟 Featured Jobs</h2>
 
-    <!-- Company Section -->
-    <section id="company" class="py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center mb-4">Featured Employers</h2>
-            <div class="row">
-                {{-- @foreach ($companies as $company) --}}
-                <div class="col-md-3 mb-4">
-                    <div class="card h-100 text-center shadow-sm">
-                        <div class="card-body">
-                            <img src="#" class="img-fluid mb-3" style="max-height:60px;">
-                            <h5 class="card-title">Company Name</h5>
-                            <p class="text-muted">Company Address</p>
-                        </div>
-                    </div>
-                </div>
-                {{-- @endforeach --}}
+            <div id="jobs-container">
+                @include('partials.jobs')
             </div>
         </div>
     </section>
 
     <!-- Events Section -->
-    <section id="events" class="py-5">
-        <div class="container">
-            <h2 class="text-center mb-4">Upcoming Events</h2>
-            <div class="row">
-                {{-- @foreach ($events as $event) --}}
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">Event Title</h5>
-                            <p class="text-muted">Event Location</p>
-                            <p><strong>Date:</strong> Event Date</p>
-                            {{-- @if (now()->between($event->start_time, $event->end_time))
-                                        <span class="badge bg-success">Ongoing</span>
-                                    @elseif(now()->lt($event->start_time))
-                                        <span class="badge bg-info">Upcoming</span>
-                                    @else
-                                        <span class="badge bg-secondary">Finished</span>
-                                    @endif --}}
+    <section id="events" class="py-2 bg-light">
+        <div class="container text-center">
+            <h2 class="fw-bold text-primary mb-2">📅 Events</h2>
+
+            <div class="row justify-content-center">
+                @forelse ($events as $event)
+                    <div class="col-md-4 mb-3">
+                        <div class="card shadow-sm border-0 h-100">
+                            <div class="card-header bg-primary text-white fw-bold">
+                                {{ $event->event_name }}
+                            </div>
+
+                            <div class="card-body">
+                                <p class="mb-1">
+                                    <i class="bi bi-geo-alt-fill text-danger"></i>
+                                    <span class="fw-semibold">{{ $event->location }}</span>
+                                </p>
+
+                                <p class="mb-2">
+                                    <i class="bi bi-calendar-event text-success"></i>
+                                    <strong>Date:</strong>
+                                    {{ \Carbon\Carbon::parse($event->start_time)->format('M d, Y H:i') }}
+                                    –
+                                    {{ \Carbon\Carbon::parse($event->end_time)->format('M d, Y H:i') }}
+                                </p>
+
+                                @if (now()->between($event->start_time, $event->end_time))
+                                    <span class="badge bg-success">Ongoing</span>
+                                @elseif (now()->lt($event->start_time))
+                                    <span class="badge bg-info">Upcoming</span>
+                                @endif
+                            </div>
                         </div>
                     </div>
-                </div>
-                {{-- @endforeach --}}
+                @empty
+                    <div class="col-12">
+                        <div class="alert alert-warning fw-bold">
+                            No events available right now.
+                        </div>
+                    </div>
+                @endforelse
             </div>
         </div>
     </section>
+
+    <!-- Company Section -->
+    <section id="company" class="py-3 bg-light">
+        <div class="container">
+            <h2 class="text-center fw-bold text-primary mb-3">🏢 Featured Employers</h2>
+
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <div class="card h-100 text-center shadow-sm">
+                        <div class="card-body">
+                            <img src="#" class="img-fluid mb-2" style="max-height:60px;">
+                            <h5 class="card-title">Company Name</h5>
+                            <p class="text-muted">Company Address</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <!-- About Section -->
     <section id="about" class="py-5 bg-light">
@@ -241,6 +195,87 @@
             }
         });
     </script>
+
+    <!-- AJAX Pagination Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const jobsContainer = document.getElementById('jobs-container');
+            const eventsContainer = document.getElementById('events-container');
+
+            function createSpinner() {
+                const spinner = document.createElement('div');
+                spinner.className = "overlay-spinner";
+                spinner.innerHTML =
+                    '<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>';
+                return spinner;
+            }
+
+            // Jobs pagination
+            jobsContainer.addEventListener('click', function(e) {
+                const link = e.target.closest('.pagination a');
+                if (link) {
+                    e.preventDefault();
+                    const url = link.getAttribute('href');
+
+                    jobsContainer.style.position = "relative";
+                    const jobsSpinner = createSpinner();
+                    jobsContainer.appendChild(jobsSpinner);
+
+                    fetch(url, {
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest'
+                            }
+                        })
+                        .then(response => response.text())
+                        .then(html => {
+                            jobsContainer.innerHTML = html;
+                            jobsContainer.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        })
+                        .catch(err => console.error(err))
+                        .finally(() => {
+                            jobsSpinner.classList.add("fade-out");
+                            setTimeout(() => jobsSpinner.remove(), 400); // wait for transition
+                        });
+                }
+            });
+
+            // Events pagination
+            eventsContainer.addEventListener('click', function(e) {
+                const link = e.target.closest('#pagination-links a');
+                if (link) {
+                    e.preventDefault();
+                    const url = link.getAttribute('href');
+
+                    eventsContainer.style.position = "relative";
+                    const eventsSpinner = createSpinner();
+                    eventsContainer.appendChild(eventsSpinner);
+
+                    fetch(url, {
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest'
+                            }
+                        })
+                        .then(response => response.text())
+                        .then(html => {
+                            eventsContainer.innerHTML = html;
+                            eventsContainer.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        })
+                        .catch(err => console.error(err))
+                        .finally(() => {
+                            eventsSpinner.classList.add("fade-out");
+                            setTimeout(() => eventsSpinner.remove(), 400);
+                        });
+                }
+            });
+        });
+    </script>
+
 
 </body>
 

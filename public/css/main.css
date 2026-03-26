@@ -27,7 +27,7 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #918f8f;
 }
 
 /* Handle */
@@ -338,101 +338,6 @@ input[type="search"]:focus {
   background-image: url("../img/icons/dashboard.png");
 }
 
-.menu-icon-doctor {
-  background-image: url("../img/icons/dentist.png");
-}
-
-
-.menu-icon-patient {
-  background-image: url("../img/icons/patient.png");
-}
-.menu-icon-settings {
-  background-image: url("../img/icons/setting.png");
-}
-.menu-icon-home {
-  background-image: url("../img/icons/home.png");
-}
-
-.menu-icon-dashbord:hover,
-.menu-icon-dashbord-active {
-  color: var(--primarycolor);
-
-  background-image: url("../img/icons/dashboard-violet.png");
-}
-
-.menu-icon-doctor:hover,
-.menu-icon-doctor-active {
-  color: var(--primarycolor);
-  background-image: url("../img/icons/dentist-violet.png");
-}
-.menu-icon-schedule:hover,
-.menu-icon-schedule-active {
-  color: var(--primarycolor);
-
-  background-image: url("../img/icons/schedule-violet.png");
-}
-.menu-icon-appoinment:hover,
-.menu-icon-appoinment-active {
-  color: var(--primarycolor);
-
-  background-image: url("../img/icons/appointment-violet.png");
-}
-.menu-icon-patient:hover,
-.menu-icon-patient-active {
-  color: var(--primarycolor);
-
-  background-image: url("../img/icons/patient-violet.png");
-}
-
-.menu-icon-settings:hover,
-.menu-icon-settings-active {
-  color: var(--primarycolor);
-
-  background-image: url("../img/icons/setting-violet.png");
-}
-
-.menu-icon-session:hover,
-.menu-icon-session-active {
-  color: var(--primarycolor);
-
-  background-image: url("../img/icons/schedule.png");
-}
-.menu-icon-home:hover,
-.menu-icon-home-active {
-  color: var(--primarycolor);
-
-  background-image: url("../img/icons/home-violet.png");
-}
-
-.btn-edit {
-  background-image: url("../img/icons/edit-violet.png");
-}
-.btn-edit:hover {
-  background-image: url("../img/icons/edit-white.png");
-}
-
-.btn-view {
-  background-image: url("../img/icons/view-violet.png");
-}
-.btn-view:hover {
-  background-image: url("../img/icons/view-white.png");
-}
-
-.btn-delete {
-  background-image: url("../img/icons/remove-violet.png");
-}
-.btn-delete:hover {
-  background-image: url("../img/icons/remove-white.png");
-}
-
-.btn-filter {
-  background-image: url("../img/icons/filter-violet.png");
-  background-position: 15px 50%;
-}
-.btn-filter:hover {
-  background-image: url("../img/icons/filter.png");
-}
-
 .dashboard-items {
   border: 2px solid #c9cbce9f;
   border-radius: 7px;
@@ -472,60 +377,6 @@ input[type="search"]:focus {
   border-radius: 7px;
   margin-left: 5px;
   margin-right: 20px;
-}
-
-.setting-tabs:hover {
-  background-color: #d6d6d657;
-}
-
-.doctor-header {
-  background-image: url(../img/b4.jpg);
-  color: rgba(0, 0, 0, 0.87);
-  background-size: 100%;
-  background-repeat: no-repeat;
-  padding: 20px;
-  padding-left: 35px;
-}
-
-.patient-header {
-  background-image: url(../img/bg-patient.png);
-}
-
-.search-items {
-  padding: 20px;
-  margin: 10px;
-  width: 95%;
-  display: flex;
-  padding-left: 0;
-  padding-left: 30px;
-  box-sizing: border-box;
-  line-height: 1.5;
-  box-shadow: 0 3px 5px 0 rgba(95, 95, 97, 0.068);
-}
-
-.h1-search {
-  margin: 0;
-  padding: 0;
-  font-size: 23px;
-  font-weight: 600;
-  padding-top: 20px;
-  padding-bottom: 10px;
-}
-
-.h3-search {
-  margin: 0;
-  padding: 0;
-  font-size: 15px;
-  font-weight: 500;
-  color: #212529e3;
-}
-
-.h4-search {
-  margin: 0;
-  padding: 0;
-  font-size: 13px;
-  font-weight: 400;
-  color: #212529e3;
 }
 
 .btn-book {

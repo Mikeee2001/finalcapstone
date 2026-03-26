@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 
 class EventController extends Controller
 {
-    public function index()
+    public function index(request $request)
     {
         $events = Events::latest()->get();
         return view('admin.events-list', compact('events'));

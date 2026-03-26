@@ -10,9 +10,20 @@ use Illuminate\Support\Facades\Auth;
 
 class JobController extends Controller
 {
+    public function toggleButton(Request $request)
+    {
+
+    }
+
     public function getJobPostForm()
     {
         return view('employer.job-list');
+    }
+
+    public function getJob()
+    {
+        $jobs = JobPosts::with('skill')->get();
+        return response()->json($jobs);
     }
 
     public function getJobList()
@@ -43,8 +54,7 @@ class JobController extends Controller
         ]);
     }
 
-
-    public function addJobPost(Request $request)
+    public function addJob(Request $request)
     {
         try {
             $validated = $request->validate([
@@ -95,6 +105,22 @@ class JobController extends Controller
             return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
+
+    public function toggleStatus(Request $request, $id)
+    {
+        $job = JobPosts::findOrFail($id); // use route param, fail if not found
+
+        // Flip status based on current value in DB
+        $job->status = $job->status === 'active' ? 'inactive' : 'active';
+        $job->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Job status updated successfully!',
+            'status' => $job->status
+        ]);
+    }
+
 
 
 }
