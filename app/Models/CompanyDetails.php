@@ -14,13 +14,13 @@ class CompanyDetails extends Model
     protected $table = 'company_details';
 
     protected $fillable =
-    [
-        'company_logo',
-        'company_name',
-        'company_address',
-        'company_description',
-        'employer_id'
-    ];
+        [
+            'company_logo',
+            'company_name',
+            'company_address',
+            'company_description',
+            'employer_id'
+        ];
 
     public function employer()
     {
@@ -36,4 +36,5 @@ class CompanyDetails extends Model
     {
         return $this->hasMany(JobPosts::class, 'company_id');
     }
+
 }

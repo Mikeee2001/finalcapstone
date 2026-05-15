@@ -12,7 +12,7 @@ class Jobseeker extends Model
     protected $table = 'jobseekers';
 
     protected $fillable = [
-        'address',
+        'location',
         'expected_salary',
         'application_letter',
         'resume',
@@ -27,8 +27,7 @@ class Jobseeker extends Model
 
     public function skills()
     {
-        return $this->belongsToMany(Skills::class, 'jobseeker_skills', 'jobseeker_id', 'skill_id')
-                    ->withTimestamps();
+        return $this->belongsToMany(Skills::class, 'jobseeker_skills', 'jobseeker_id', 'skill_id')->withTimestamps();
     }
 
 }

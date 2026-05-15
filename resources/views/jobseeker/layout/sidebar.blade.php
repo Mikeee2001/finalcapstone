@@ -7,7 +7,6 @@
             </div>
         </div>
 
-
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -17,6 +16,22 @@
                         class="nav-link {{ Route::is('jobseeker.dashboard') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Home</p>
+                    </a>
+                </li>
+
+                <!-- Jobs -->
+                <li class="nav-item menu-open" style="margin-bottom: 10px;">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-briefcase"></i>
+                        <p>Application</p>
+                    </a>
+                </li>
+
+                 <!-- Settings -->
+                <li class="nav-item menu-open" style="margin-bottom: 10px;">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-cog"></i>
+                        <p>Settings</p>
                     </a>
                 </li>
 

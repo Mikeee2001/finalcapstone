@@ -49,8 +49,11 @@
                         <a class="nav-link fill-btn main-btn" href="{{ route('signin') }}">Sign in</a>
                     </li>
 
-                    <li class="nav-item ms-lg-2">
+                    {{-- <li class="nav-item ms-lg-2">
                         <a class="signup nav-link main-btn" href="{{ route('employer') }}">Employer Site</a>
+                    </li> --}}
+                     <li class="nav-item ms-lg-2">
+                        <a class="signup nav-link main-btn" href="{{ route('signup') }}">Sign Up</a>
                     </li>
                 </ul>
             </div>

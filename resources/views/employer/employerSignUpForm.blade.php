@@ -63,8 +63,34 @@
 
                         <div class="form-group">
                             <label class="form-label">Company Address:</label>
-                            <input type="text" name="company_address" class="input-text"
-                                placeholder="Company Address" required>
+                            <select name="company_address" class="input-text" required>
+                                <option value="" disabled selected>Select Barangay</option>
+                                <option value="Awang" {{ old('company_address') == 'Awang' ? 'selected' : '' }}>Awang
+                                </option>
+                                <option value="Bagocboc" {{ old('company_address') == 'Bagocboc' ? 'selected' : '' }}>
+                                    Bagocboc</option>
+                                <option value="Barra" {{ old('company_address') == 'Barra' ? 'selected' : '' }}>Barra
+                                </option>
+                                <option value="Bonbon" {{ old('company_address') == 'Bonbon' ? 'selected' : '' }}>
+                                    Bonbon</option>
+                                <option value="Cauyonan" {{ old('company_address') == 'Cauyonan' ? 'selected' : '' }}>
+                                    Cauyonan</option>
+                                <option value="Igpit" {{ old('company_address') == 'Igpit' ? 'selected' : '' }}>Igpit
+                                </option>
+                                <option value="Luyongbonbon"
+                                    {{ old('company_address') == 'Luyongbonbon' ? 'selected' : '' }}>Luyongbonbon
+                                </option>
+                                <option value="Malanang" {{ old('company_address') == 'Malanang' ? 'selected' : '' }}>
+                                    Malanang</option>
+                                <option value="Nangcaon" {{ old('company_address') == 'Nangcaon' ? 'selected' : '' }}>
+                                    Nangcaon</option>
+                                <option value="Patag" {{ old('company_address') == 'Patag' ? 'selected' : '' }}>Patag
+                                </option>
+                                <option value="Poblacion"
+                                    {{ old('company_address') == 'Poblacion' ? 'selected' : '' }}>Poblacion</option>
+                                <option value="Tingalan" {{ old('company_address') == 'Tingalan' ? 'selected' : '' }}>
+                                    Tingalan</option>
+                            </select>
                             @error('company_address')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -74,7 +100,7 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Company Description:</label>
-                            <textarea name="company_description" class="input-text" placeholder="Brief description of your company" required></textarea>
+                            <textarea name="company_description" class="input-text" placeholder="Brief description of your company (optional)"></textarea>
                             @error('company_description')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror

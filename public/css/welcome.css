@@ -627,45 +627,37 @@ p {
 }
 
 .job-card {
-    border-radius: 10px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    background-color: #fff;
+    border: none;
+    border-radius: 8px;
+    /* subtle rounded corners */
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .job-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
 }
 
-.job-card .card-body {
-    padding: 1.5rem;
-}
-
-.job-card .card-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: .5rem;
-    color: #333;
-}
-
-.job-card p {
-    margin-bottom: .4rem;
+.job-meta {
     font-size: 0.9rem;
     color: #555;
 }
 
-.job-card .badge {
-    background-color: #e9ecef;
-    color: #333;
-    font-size: 0.75rem;
-    padding: 0.4em 0.6em;
-    border-radius: 6px;
+.job-badge {
+    display: inline-block;
+    margin: 2px 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
 }
 
-.job-card .card-footer {
-    background-color: #fafafa;
-    font-size: 0.85rem;
+.job-badge i {
+    margin-right: 4px;
+}
+
+.card-footer {
     border-top: 1px solid #eee;
+    font-size: 0.8rem;
+    padding: 6px 10px;
 }
 
 Apply Now button .apply-now-btn,

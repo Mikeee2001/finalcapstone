@@ -37,7 +37,7 @@ class LoginController extends Controller
 
                 case 'jobseeker':
                     if ($user->status === 'active') {
-                        return redirect()->route('jobseeker.dashboard');
+                        return redirect()->route('jobseeker.show');
                     } else {
                         return redirect()->route('signin')
                             ->with('error', 'Please wait for your account approval.');

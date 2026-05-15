@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('company_logo')->nullable();
             $table->string('company_name');
-            $table->string('company_address');
-            $table->string('company_description');
+            $table->enum('company_address', ['Awang', 'Bagocboc', 'Barra', 'Bonbon', 'Cauyonan', 'Igpit', 'Luyongbonbon', 'Malanang', 'Nangcaon', 'Patag', 'Poblacion', 'Tingalan' ]);
+            $table->string('company_description')->nullable();
             $table->timestamps();
 
             $table->foreignId('employer_id')->constrained('employers')->onDelete('cascade');

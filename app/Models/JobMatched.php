@@ -20,5 +20,15 @@ class JobMatched extends Model
         'jobseeker_id',
         'total_match_percent',
     ];
+
+    public function jobPost()
+    {
+        return $this->belongsTo(JobPosts::class, 'jobpost_id');
+    }
+
+    public function jobSeeker()
+    {
+        return $this->belongsTo(Jobseeker::class, 'jobseeker_id');
+    }
 }
 

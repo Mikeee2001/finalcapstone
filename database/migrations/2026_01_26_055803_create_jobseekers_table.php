@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('jobseekers', function (Blueprint $table) {
             $table->id();
 
-            $table->string('address');
+            $table->enum('location', ['Awang', 'Bagocboc', 'Barra', 'Bonbon', 'Cauyonan', 'Igpit', 'Luyongbonbon', 'Malanang', 'Nangcaon', 'Patag', 'Poblacion', 'Tingalan' ]);
             $table->integer('expected_salary');
             $table->string('application_letter');
             $table->string('resume');

@@ -3,10 +3,9 @@
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\IndexController as AdminIndexController;
 use App\Http\Controllers\Controller;
-
 use App\Http\Controllers\Employer\IndexController as EmployerIndexController;
 use App\Http\Controllers\Employer\JobController;
-
+use App\Http\Controllers\Jobseeker\ApplicationController;
 use App\Http\Controllers\Jobseeker\IndexController as JobseekerIndexController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SignupController;
@@ -27,13 +26,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [Controller::class, 'index'])->name('welcome');
-// Route::get('/jobs',[JobController::class, 'list'])->name('jobs.list');
 
 // Login and Signup Routes
 Route::get('/signup', [SignupController::class, 'index'])->name('signup');
 Route::post('/signup', [SignupController::class, 'signup'])->name('signup-form');
 Route::get('/signin', [LoginController::class, 'signin'])->name('signin');
 Route::post('/signin', [LoginController::class, 'loginForm'])->name('login-form');
+
+Route::get('/skills/search', [JobController::class, 'search'])->name('skills-search');
 
 Route::get('/employer', [EmployerIndexController::class, 'getEmployerPage'])->name('employer');
 Route::get('/employer/signup', [EmployerIndexController::class, 'getEmployerSignupForm'])->name('employersignupForm');
@@ -66,7 +66,7 @@ Route::get('/email/verify/{id}/{hash}', function ($id, $hash) {
             return redirect()->route('employer.dashboard');
 
         case 'jobseeker':
-            return redirect()->route('jobseeker.dashboard');
+            return redirect()->route('jobseeker.show');
 
         default:
             return redirect()->route('signin');
@@ -100,7 +100,13 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'checkRole:admin'])->gro
 
 
 // Jobseeker Routes
-Route::get('/jobseeker/dashboard', [JobseekerIndexController::class, 'dasboard'])->middleware(['auth', 'verified'])->name('jobseeker.dashboard');
+Route::prefix('jobseeker')->middleware(['auth', 'verified', 'checkRole:jobseeker'])->group(function () {
+
+    Route::get('/dashboard', [JobseekerIndexController::class, 'dashboard'])->name('jobseeker.dashboard');
+    Route::get('/show-jobs', [JobseekerIndexController::class, 'showJobsPage'])->name('jobseeker.show');
+    Route::get('/matched-jobs', [ApplicationController::class, 'matchedJobs'])->name('jobseeker.matched-jobs');
+
+});
 // Jobseeker Routes//
 
 // Employer Routes
@@ -116,9 +122,9 @@ Route::prefix('employer')->middleware(['auth', 'verified', 'checkRole:employer']
 });
 // END employer routes
 
-
 // Logout Routes
 Route::get('/logout/jobseeker', [Controller::class, 'logout'])->name('jobseeker.logout');
 Route::get('/logout/employer', [Controller::class, 'logout'])->name('employer.logout');
 Route::get('/logout/admin', [Controller::class, 'logout'])->name('admin.logout');
+Route::get('/logout', [Controller::class, 'logout'])->name('logout');
 

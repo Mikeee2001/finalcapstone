@@ -1,34 +1,46 @@
 <style>
     .job-card {
-        border: none;              /* remove border */
-        border-radius: 0;          /* remove rounded corners */
+        border: none;
+        /* remove border */
+        border-radius: 0;
+        /* remove rounded corners */
         transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
     .job-card:hover {
         transform: translateY(-6px);
-        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15); /* subtle shadow only */
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+        /* subtle shadow only */
     }
 
     /* Remove box styles from badges */
     .salary-badge,
     .skill-badge,
     .jobtype-badge {
-        background: none;          /* no background */
-        color: #000;               /* plain black text */
-        border: none;              /* no border */
-        font-weight: 500;          /* keep text bold-ish */
-        padding: 0;                /* no padding */
+        background: none;
+        /* no background */
+        color: #000;
+        /* plain black text */
+        border: none;
+        /* no border */
+        font-weight: 500;
+        /* keep text bold-ish */
+        padding: 0;
+        /* no padding */
     }
 
     .card-footer {
-        border-top: 1px solid #eee;   /* subtle divider */
-        font-size: 0.85rem;           /* smaller text for metadata */
-        padding: 8px 12px;            /* balanced spacing */
+        border-top: 1px solid #eee;
+        /* subtle divider */
+        font-size: 0.85rem;
+        /* smaller text for metadata */
+        padding: 8px 12px;
+        /* balanced spacing */
     }
 
     .card-footer small {
-        font-style: italic;           /* softer look for metadata */
+        font-style: italic;
+        /* softer look for metadata */
     }
 </style>
 
@@ -40,8 +52,8 @@
                 <div class="card-body text-center p-3">
                     @if ($job->companyDetails && $job->companyDetails->company_logo)
                         <img src="{{ asset('storage/' . $job->companyDetails->company_logo) }}"
-                             class="img-fluid mb-2 rounded-circle border"
-                             style="height:50px; width:50px; object-fit:cover;">
+                            class="img-fluid mb-2 rounded-circle border"
+                            style="height:50px; width:50px; object-fit:cover;">
                     @endif
 
                     <h6 class="fw-bold mb-1">{{ $job->title }}</h6>
@@ -51,17 +63,17 @@
                         <i class="bi bi-geo-alt"></i> {{ $job->location }}
                     </p>
 
-                    <p class="mb-2">
-                        <span class="salary-badge">
-                            ₱{{ number_format($job->salary_min) }} – ₱{{ number_format($job->salary_max) }} / month
-                        </span>
-                    </p>
-
                     @if ($job->skill)
                         <span class="skill-badge">
                             {{ $job->skill->skill_name }}
                         </span>
                     @endif
+
+                    <p class="mb-2">
+                        <span class="salary-badge">
+                            ₱{{ number_format($job->salary_min) }} – ₱{{ number_format($job->salary_max) }} / month
+                        </span>
+                    </p>
 
                     <div class="mt-2">
                         <span class="jobtype-badge">

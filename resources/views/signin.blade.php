@@ -66,7 +66,8 @@
     </div>
 
     <!----Sweet Alert---->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('dist/js/sweetalert2.min.js') }}"></script>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

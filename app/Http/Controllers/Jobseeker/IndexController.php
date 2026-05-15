@@ -2,13 +2,30 @@
 
 namespace App\Http\Controllers\Jobseeker;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\JobMatched;
+use App\Models\Jobseeker;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
 {
-    public function dasboard()
+    public function showJobsPage()
+    {
+        $jobseeker = Jobseeker::where('user_id', auth()->id())
+            ->with('skills')
+            ->firstOrFail();
+
+        $matchedJobs = JobMatched::with(['jobPost.companyDetails', 'jobPost.skill'])
+            ->where('jobseeker_id', $jobseeker->id)
+            ->where('total_match_percent', '>=', 25)
+            ->orderByDesc('total_match_percent')
+            ->paginate(10);
+
+        return view('jobseeker.show', compact('matchedJobs'));
+    }
+
+    public function dashboard()
     {
         return view('jobseeker.dashboard');
     }

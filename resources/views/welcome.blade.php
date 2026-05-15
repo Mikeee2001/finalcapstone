@@ -51,56 +51,52 @@
         </div>
     </section>
 
-    <!-- Events Section -->
-    <section id="events" class="py-2 bg-light">
-        <div class="container text-center">
-            <h2 class="fw-bold text-primary mb-2">📅 Events</h2>
+    {{-- Events Section --}}
+    @if ($events->count() > 0)
+        <section id="events" class="py-2 bg-light">
+            <div class="container text-center">
+                <h2 class="fw-bold text-primary mb-2">📅 Events</h2>
 
-            <div class="row justify-content-center">
-                @forelse ($events as $event)
-                    <div class="col-md-4 mb-3">
-                        <div class="card shadow-sm border-0 h-100">
-                            <div class="card-header bg-primary text-white fw-bold">
-                                {{ $event->event_name }}
-                            </div>
+                <div class="row justify-content-center">
+                    @foreach ($events as $event)
+                        <div class="col-md-4 mb-3">
+                            <div class="card shadow-sm border-0 h-100">
+                                <div class="card-header bg-primary text-white fw-bold">
+                                    {{ $event->event_name }}
+                                </div>
 
-                            <div class="card-body">
-                                <p class="mb-1">
-                                    <i class="bi bi-geo-alt-fill text-danger"></i>
-                                    <span class="fw-semibold">{{ $event->location }}</span>
-                                </p>
+                                <div class="card-body">
+                                    <p class="mb-1">
+                                        <i class="bi bi-geo-alt-fill text-danger"></i>
+                                        <span class="fw-semibold">{{ $event->location }}</span>
+                                    </p>
 
-                                <p class="mb-2">
-                                    <i class="bi bi-calendar-event text-success"></i>
-                                    <strong>Date:</strong>
-                                    {{ \Carbon\Carbon::parse($event->start_time)->format('M d, Y H:i') }}
-                                    –
-                                    {{ \Carbon\Carbon::parse($event->end_time)->format('M d, Y H:i') }}
-                                </p>
+                                    <p class="mb-2">
+                                        <i class="bi bi-calendar-event text-success"></i>
+                                        <strong>Date:</strong>
+                                        {{ \Carbon\Carbon::parse($event->start_time)->format('M d, Y H:i') }}
+                                        –
+                                        {{ \Carbon\Carbon::parse($event->end_time)->format('M d, Y H:i') }}
+                                    </p>
 
-                                @if (now()->between($event->start_time, $event->end_time))
-                                    <span class="badge bg-success">Ongoing</span>
-                                @elseif (now()->lt($event->start_time))
-                                    <span class="badge bg-info">Upcoming</span>
-                                @endif
+                                    @if (now()->between($event->start_time, $event->end_time))
+                                        <span class="badge bg-success">Ongoing</span>
+                                    @elseif (now()->lt($event->start_time))
+                                        <span class="badge bg-info">Upcoming</span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @empty
-                    <div class="col-12">
-                        <div class="alert alert-warning fw-bold">
-                            No events available right now.
-                        </div>
-                    </div>
-                @endforelse
+                    @endforeach
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
 
     <!-- Company Section -->
     <section id="company" class="py-3 bg-light">
         <div class="container">
-            <h2 class="text-center fw-bold text-primary mb-3">🏢 Featured Employers</h2>
+            <h2 class="text-center fw-bold text-primary mb-3">🏢 Featured Companies</h2>
 
             <div class="row">
                 <div class="col-md-3 mb-3">
@@ -147,7 +143,7 @@
 
     <!-- Footer -->
     <footer class="bg-dark text-white text-center py-3">
-        <p>&copy; {{ date('Y') }} PESO Employment System. All rights reserved.</p>
+        <p>&copy; {{ date('Y') }} OPOL-PESO Employment System. All rights reserved.</p>
     </footer>
 
     </div>

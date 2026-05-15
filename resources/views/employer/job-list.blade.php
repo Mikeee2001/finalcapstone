@@ -31,24 +31,21 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title" style="font-size: 2em">Jobs List</h3>
-                            <!-- Add New Account Button -->
                             <button class="btn btn-primary float-right" data-toggle="modal" data-target="#addJobModal">
                                 Add Job
                             </button>
                         </div>
                         <div class="card-body">
-
                             <div id="tableLoader" class="custom-loader"></div>
 
                             <table id="jobsTable" class="table table-bordered table-striped">
                                 <thead>
                                     <tr class="text-center">
-
-                                        <td>No.</td>
+                                        <th>No.</th>
                                         <th>Job Title</th>
                                         <th>Job Description</th>
                                         <th>Location</th>
-                                        <th>Salary Range</th>
+                                        <th>Salary</th>
                                         <th>Job Type</th>
                                         <th>Skill Required</th>
                                         <th>Date Posted</th>
@@ -56,7 +53,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($jobs as $index => $job)
+                                    {{-- @foreach ($jobs as $index => $job)
                                         <tr class="text-center">
                                             <td>{{ $index + 1 }}</td>
                                             <td>{{ $job->title }}</td>
@@ -71,22 +68,21 @@
                                                     class="badge {{ $job->status === 'active' ? 'bg-success' : 'bg-danger' }}">
                                                     {{ ucfirst($job->status) }}
                                                 </span>
-
                                                 <button
                                                     class="btn btn-sm {{ $job->status === 'active' ? 'btn-outline-danger' : 'btn-outline-success' }} status-btn ms-2"
                                                     data-url="{{ route('employer.toggle-job-status', $job->id) }}">
                                                     {{ $job->status === 'active' ? 'Deactivate' : 'Activate' }}
                                                 </button>
                                             </td>
-
                                         </tr>
-                                    @endforeach
+                                    @endforeach --}}
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
         <!-- Modal for Adding New Job -->
@@ -141,29 +137,50 @@
 
                             <!-- Location -->
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Location</label>
+                                <label class="col-sm-3 col-form-label">Address</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="location"required class="form-control"
-                                        placeholder="Enter location" required>
-                                    <span class="text-danger error-text location_error"></span>
+                                    <select name="location" class="form-control" required>
+                                        <option value="" disabled selected>Select Barangay</option>
+                                        <option value="Awang" {{ old('location') == 'Awang' ? 'selected' : '' }}>Awang
+                                        </option>
+                                        <option value="Bagocboc" {{ old('location') == 'Bagocboc' ? 'selected' : '' }}>
+                                            Bagocboc</option>
+                                        <option value="Barra" {{ old('location') == 'Barra' ? 'selected' : '' }}>Barra
+                                        </option>
+                                        <option value="Bonbon" {{ old('location') == 'Bonbon' ? 'selected' : '' }}>
+                                            Bonbon</option>
+                                        <option value="Cauyonan" {{ old('location') == 'Cauyonan' ? 'selected' : '' }}>
+                                            Cauyonan</option>
+                                        <option value="Igpit" {{ old('location') == 'Igpit' ? 'selected' : '' }}>Igpit
+                                        </option>
+                                        <option value="Luyongbonbon"
+                                            {{ old('location') == 'Luyongbonbon' ? 'selected' : '' }}>Luyongbonbon
+                                        </option>
+                                        <option value="Malanang" {{ old('location') == 'Malanang' ? 'selected' : '' }}>
+                                            Malanang</option>
+                                        <option value="Nangcaon" {{ old('location') == 'Nangcaon' ? 'selected' : '' }}>
+                                            Nangcaon</option>
+                                        <option value="Patag" {{ old('location') == 'Patag' ? 'selected' : '' }}>Patag
+                                        </option>
+                                        <option value="Poblacion"
+                                            {{ old('location') == 'Poblacion' ? 'selected' : '' }}>Poblacion</option>
+                                        <option value="Tingalan" {{ old('location') == 'Tingalan' ? 'selected' : '' }}>
+                                            Tingalan</option>
+                                    </select>
+                                    @error('location')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
 
+
                             <!-- Salary Range -->
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Minimum Salary</label>
+                                <label class="col-sm-3 col-form-label">Salary</label>
                                 <div class="col-sm-9">
-                                    <input type="number" name="salary_min" class="form-control"
-                                        placeholder="Enter minimum salary" required>
-                                    <span class="text-danger error-text salary_min_error"></span>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Maximum Salary</label>
-                                <div class="col-sm-9">
-                                    <input type="number" name="salary_max" class="form-control"
-                                        placeholder="Enter maximum salary" required>
-                                    <span class="text-danger error-text salary_max_error"></span>
+                                    <input type="number" name="salary" class="form-control"
+                                        placeholder="Enter salary" required>
+                                    <span class="text-danger error-text salary_error"></span>
                                 </div>
                             </div>
 
@@ -171,10 +188,19 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Required Skill</label>
                                 <div class="col-sm-9">
-                                    <select name="skill_id" id="skill" class="form-control"></select>
+                                    <select name="skill_id" id="skill" class="form-control" required>
+                                        <option value="" disabled selected>Select or enter skill</option>
+                                        @foreach ($skills as $skill)
+                                            <option value="{{ $skill->id }}"
+                                                {{ old('skill_id') == $skill->id ? 'selected' : '' }}>
+                                                {{ $skill->skill_name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                     <span class="text-danger error-text skill_error"></span>
                                 </div>
                             </div>
+
 
                         </div>
 
@@ -220,20 +246,90 @@
         <!-- Your custom scripts (initialization) -->
         <script>
             $(document).ready(function() {
-                // DataTable init
-                $('#jobsTable').DataTable({
-                    paging: true,
-                    searching: true,
-                    ordering: true,
-                    dom: 'lrtip',
+                let table = $('#jobsTable').DataTable({
+                    processing: true,
+                    serverSide: false,
+                    ajax: {
+                        url: "{{ route('employer.job-list') }}",
+                        type: 'GET',
+                        dataSrc: 'data'
+                    },
+                    columns: [{
+                            data: 'no'
+                        },
+                        {
+                            data: 'title'
+                        },
+                        {
+                            data: 'description'
+                        },
+                        {
+                            data: 'location'
+                        },
+                        {
+                            data: 'salary'
+                        },
+
+                        {
+                            data: 'job_type'
+                        },
+                        {
+                            data: 'skill'
+                        },
+                        {
+                            data: 'created_at'
+                        },
+                        {
+                            data: 'status'
+                        } // ✅ matches JSON
+                    ],
                     columnDefs: [{
                         orderable: false,
-                        targets: [6, 7, 8]
+                        targets: [8]
                     }]
+                });
+
+                // ✅ Delegated binding for toggle buttons with SweetAlert
+                $('#jobsTable').on('click', '.status-btn', function() {
+                    let url = $(this).data('url');
+
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        success: function(data) {
+                            // Reload DataTable row
+                            table.ajax.reload(null, false);
+
+                            // ✅ Success toast
+                            Swal.fire({
+                                toast: true,
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Job status updated!',
+                                showConfirmButton: false,
+                                timer: 2000,
+                                timerProgressBar: true
+                            });
+                        },
+                        error: function() {
+                            // ❌ Error toast
+                            Swal.fire({
+                                toast: true,
+                                position: 'top-end',
+                                icon: 'error',
+                                title: 'Something went wrong!',
+                                showConfirmButton: false,
+                                timer: 2000,
+                                timerProgressBar: true
+                            });
+                        }
+                    });
                 });
             });
         </script>
-
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -267,6 +363,7 @@
                         placeholder: "Select or enter skill",
                         width: '100%',
                         minimumInputLength: 1,
+                        tags: true,
                         ajax: {
                             url: "{{ route('employer.skills-search') }}",
                             dataType: 'json',
@@ -302,10 +399,39 @@
                             if (response.success) {
                                 $('#addJobModal').modal('hide');
                                 $('#addJobForm')[0].reset();
-                                toastr.success('Job post created successfully!');
+
+                                // ✅ Success toast
+                                Swal.fire({
+                                    toast: true,
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Job post created successfully!',
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                    timerProgressBar: true
+                                });
+
+                                // 🔑 If a new skill was created, add it to Select2 immediately
+                                if (response.job && response.job.skill) {
+                                    let newSkill = response.job.skill;
+                                    let option = new Option(newSkill.skill_name, newSkill.id, true,
+                                        true);
+                                    $('#skill').append(option).trigger('change');
+                                }
+
+                                // optional: reload page if you want to refresh job list
                                 location.reload();
                             } else {
-                                toastr.error(response.error || 'Something went wrong.');
+                                // ❌ Error toast
+                                Swal.fire({
+                                    toast: true,
+                                    position: 'top-end',
+                                    icon: 'error',
+                                    title: response.error || 'Something went wrong!',
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                    timerProgressBar: true
+                                });
                             }
                         },
                         error: function(response) {
@@ -314,9 +440,26 @@
                                 $.each(errors, function(field, error) {
                                     $('span.' + field + '_error').text(error[0]);
                                 });
-                                toastr.error('Please fix the errors and try again.');
+
+                                Swal.fire({
+                                    toast: true,
+                                    position: 'top-end',
+                                    icon: 'error',
+                                    title: 'Please fix the errors and try again.',
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                    timerProgressBar: true
+                                });
                             } else {
-                                toastr.error('Unexpected error occurred.');
+                                Swal.fire({
+                                    toast: true,
+                                    position: 'top-end',
+                                    icon: 'error',
+                                    title: 'Unexpected error occurred.',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true
+                                });
                             }
                         }
                     });
@@ -325,6 +468,7 @@
             });
         </script>
 
+        {{--
         <script>
             document.querySelectorAll('.status-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -341,6 +485,7 @@
                         })
                         .then(res => res.json())
                         .then(data => {
+                            // Update button + badge UI
                             if (data.status === 'active') {
                                 button.innerHTML = 'Deactivate';
                                 button.className = 'btn btn-sm btn-outline-danger status-btn ms-2';
@@ -353,7 +498,7 @@
                                 badge.innerHTML = 'Inactive';
                             }
 
-                            // ✅ Toast notification
+                            // ✅ Success toast
                             Swal.fire({
                                 toast: true,
                                 position: 'top-end',
@@ -365,6 +510,7 @@
                             });
                         })
                         .catch(() => {
+                            // ❌ Error toast
                             Swal.fire({
                                 toast: true,
                                 position: 'top-end',
@@ -377,7 +523,8 @@
                         });
                 });
             });
-        </script>
+        </script> --}}
+
 
     </div>
 

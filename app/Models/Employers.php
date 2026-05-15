@@ -21,6 +21,7 @@ class Employers extends Model
     {
         return $this->hasOne(CompanyDetails::class, 'employer_id');
     }
+    
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

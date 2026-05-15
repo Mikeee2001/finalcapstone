@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 class SignupController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         return view('signup');
     }
@@ -24,7 +24,7 @@ class SignupController extends Controller
             'full_name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed|min:8',
-            'address' => 'required|string|max:255',
+            'location' => 'required|in:Awang,Bagocboc,Barra,Bonbon,Cauyonan,Igpit,Luyongbonbon,Malanang,Nangcaon,Patag,Poblacion,Tingalan',
             'expected_salary' => 'required|numeric',
             'application_letter' => 'required|file|mimes:pdf,doc,docx,txt|max:2048',
             'resume' => 'required|file|mimes:pdf,doc,docx|max:2048',
@@ -36,7 +36,7 @@ class SignupController extends Controller
         $user = User::create([
             'full_name' => $request->input('full_name'),
             'email' => $request->input('email'),
-            'role_as' => 'jobseeker',   
+            'role_as' => 'jobseeker',
             'password' => Hash::make($request->input('password')),
             'status' => 'inactive',
         ]);
@@ -49,7 +49,7 @@ class SignupController extends Controller
 
             $jobseeker = Jobseeker::create([
                 'user_id' => $user->id,
-                'address' => $request->input('address'),
+                'location' => $request->input('location'),
                 'expected_salary' => $request->input('expected_salary'),
                 'application_letter' => $applicationLetterPath,
                 'resume' => $resumePath,

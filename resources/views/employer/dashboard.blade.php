@@ -25,7 +25,8 @@
 
         </div>
         <!-------------------------------------- Main content ---------------------------------------->
-        @include('employer.layout.footer')
+    </div>
+    @include('employer.layout.footer')
 
 </body>
 

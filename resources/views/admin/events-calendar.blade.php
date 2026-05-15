@@ -1,4 +1,4 @@
-@include('admin.layouts.header')
+@include('admin.layout.header')
 
 <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
@@ -6,8 +6,8 @@
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
 
-        @include('admin.layouts.navbar')
-        @include('admin.layouts.sidebar')
+        @include('admin.layout.navbar')
+        @include('admin.layout.sidebar')
 
         <!-- Content Wrapper -->
         <div class="content-wrapper">

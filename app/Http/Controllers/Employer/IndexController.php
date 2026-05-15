@@ -38,8 +38,8 @@ class IndexController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'company_name' => 'required|string|max:255',
-            'company_address' => 'required|string|max:255',
-            'company_description' => 'required|string|max:255',
+            'company_address' => 'required|in:Awang,Bagocboc,Barra,Bonbon,Cauyonan,Igpit,Luyongbonbon,Malanang,Nangcaon,Patag,Poblacion,Tingalan',
+            'company_description' => 'nullable|string|max:255',
             'company_logo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 

@@ -94,7 +94,7 @@ class IndexController extends Controller
 
     public function adminSettings()
     {
-        return view('admin.layouts.settings');
+        return view('admin.layout.settings');
     }
     public function adminChangePassword(Request $request)
     {

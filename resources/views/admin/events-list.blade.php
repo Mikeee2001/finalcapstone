@@ -1,11 +1,11 @@
-@include('admin.layouts.header')
+@include('admin.layout.header')
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
 
-        @include('admin.layouts.navbar')
+        @include('admin.layout.navbar')
 
-        @include('admin.layouts.sidebar')
+        @include('admin.layout.sidebar')
 
         <!-------------------------------------- Main content ---------------------------------------->
 

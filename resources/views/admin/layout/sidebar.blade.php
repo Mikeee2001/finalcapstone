@@ -19,6 +19,11 @@
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
+            <!-- ✅ Main Menu Heading -->
+            <div class="nav-header text-uppercase text-muted fw-bold ps-3 mb-2">
+                Main Menu
+            </div>
+
             <ul class="nav nav-pills nav-sidebar flex-column" role="menu">
                 <li class="nav-item menu-open mb-2">
                     <a href="{{ route('admin.dashboard') }}"

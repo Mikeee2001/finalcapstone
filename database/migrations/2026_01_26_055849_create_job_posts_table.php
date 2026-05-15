@@ -14,9 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->string('location');
-            $table->integer('salary_min');
-            $table->integer('salary_max');
+            $table->enum('location', ['Awang', 'Bagocboc', 'Barra', 'Bonbon', 'Cauyonan', 'Igpit', 'Luyongbonbon', 'Malanang', 'Nangcaon', 'Patag', 'Poblacion', 'Tingalan']);
+            $table->integer('salary');
             $table->enum('job_type', ['full-time', 'part-time']);
             $table->timestamps();
             $table->enum('status', ['active', 'inactive'])->default('inactive');
